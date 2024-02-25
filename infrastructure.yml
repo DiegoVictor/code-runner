@@ -1,0 +1,36 @@
+Resources:
+  CodeRunnerRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: code-runner
+      EmptyOnDelete: true
+      ImageScanningConfiguration:
+        ScanOnPush: false
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action:
+              - "ecr:BatchGetImage"
+              - "ecr:DeleteRepositoryPolicy"
+              - "ecr:GetDownloadUrlForLayer"
+              - "ecr:GetRepositoryPolicy"
+              - "ecr:SetRepositoryPolicy"
+              - "ecr:BatchCheckLayerAvailability"
+              - "ecr:CompleteLayerUpload"
+              - "ecr:InitiateLayerUpload"
+              - "ecr:PutImage"
+              - "ecr:UploadLayerPart"
+
+  CodeRunnerS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: code-runner
+
+Outputs:
+  CodeRunnerS3Bucket:
+    Value: !Ref CodeRunnerBucket
+    Export:
+      Name: !Join [ '', [ !Ref 'AWS::StackName', 's3-bucket-name' ] ]
