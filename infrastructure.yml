@@ -24,13 +24,13 @@ Resources:
               - "ecr:PutImage"
               - "ecr:UploadLayerPart"
 
-  CodeRunnerS3Bucket:
+  CodeRunnerBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: code-runner
+      BucketName: code-runner-bucket
 
 Outputs:
-  CodeRunnerS3Bucket:
-    Value: !Ref CodeRunnerS3Bucket
+  CodeRunnerBucketName:
+    Value: !Ref CodeRunnerBucket
     Export:
-      Name: !Join [ '', [ !Ref 'AWS::StackName', 's3-bucket-name' ] ]
+      Name: !Join [ '', [ !Ref 'AWS::StackName', 'code-runner-bucket-name' ] ]
