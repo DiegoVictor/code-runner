@@ -1,0 +1,28 @@
+Resources:
+  PipelineUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: code-runner-pipeline-user
+      Policies:
+        - PolicyName: AssumeRole
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "sts:AssumeRole"
+                Resource: "*"
+
+  PipelineUserAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Serial: 1
+      Status: Active
+      UserName: !Ref PipelineUser
+
+  PipelineUserSecretKey:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub 'pipeline-user/access-keys'
+      Description: !Sub 'Access keys for pipeline user'
+      SecretString: !Sub '{"aws_access_key_id": "${PipelineUserAccessKey}", "aws_secret_access_key": "${PipelineUserAccessKey.SecretAccessKey}"}'
