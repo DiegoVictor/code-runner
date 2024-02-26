@@ -31,6 +31,6 @@ Resources:
 
 Outputs:
   CodeRunnerS3Bucket:
-    Value: !Ref CodeRunnerBucket
+    Value: !Ref CodeRunnerS3Bucket
     Export:
       Name: !Join [ '', [ !Ref 'AWS::StackName', 's3-bucket-name' ] ]
