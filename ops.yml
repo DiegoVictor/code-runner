@@ -52,9 +52,10 @@ Resources:
             Action:
               - "cloudformation:CreateChangeSet"
               - "cloudformation:DescribeChangeSet"
-              - "cloudformation:ExecuteChangeSet"
               - "cloudformation:DescribeStackEvents"
               - "cloudformation:DescribeStacks"
+              - "cloudformation:ExecuteChangeSet"
+              - "cloudformation:GetTemplateSummary"
               - "ecr:CreateRepository"
               - "ecr:DeleteRepository"
               - "ecr:SetRepositoryPolicy"

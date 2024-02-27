@@ -26,5 +26,6 @@ jobs:
       - name: Deploy infrastructure.yml
         run: |
           sam deploy --stack-name code-runner-infrastructure \
-            --template infrastructure.yml
+            --template infrastructure.yml \
             --no-fail-on-empty-changeset
+
