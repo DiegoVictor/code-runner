@@ -26,3 +26,39 @@ Resources:
       Name: !Sub 'pipeline-user/access-keys'
       Description: !Sub 'Access keys for pipeline user'
       SecretString: !Sub '{"aws_access_key_id": "${PipelineUserAccessKey}", "aws_secret_access_key": "${PipelineUserAccessKey.SecretAccessKey}"}'
+
+  PipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: code-runner-pipeline-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !GetAtt PipelineUser.Arn
+            Action:
+              - 'sts:AssumeRole'
+              - 'sts:TagSession'
+
+  PipelineRolePermissionPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: code-runner-pipeline-role-policy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - "cloudformation:CreateChangeSet"
+              - "cloudformation:DescribeChangeSet"
+              - "cloudformation:ExecuteChangeSet"
+              - "cloudformation:DescribeStackEvents"
+              - "cloudformation:DescribeStacks"
+              - "ecr:CreateRepository"
+              - "ecr:DeleteRepository"
+              - "ecr:SetRepositoryPolicy"
+              - "s3:CreateBucket"
+            Resource: '*'
+      Roles:
+        - !Ref PipelineRole
