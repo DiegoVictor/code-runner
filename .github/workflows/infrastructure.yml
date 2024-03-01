@@ -5,8 +5,8 @@ on:
     branches: [main]
   paths:
     - 'infrastructure.yml'
-    - './.github/workflows/infrastructure.yml'
-    - './.github/workflows/ecr-repository.yml'
+    - '.github/workflows/infrastructure.yml'
+    - '.github/workflows/ecr-repository.yml'
 
 env:
   AWS_REGION: us-east-1
