@@ -11,6 +11,3 @@ on:
 jobs:
   upsert-ecr-repository:
     uses: ./.github/workflows/ecr-repository.yml
-    with:
-      role: us-east-1
-      region: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role
