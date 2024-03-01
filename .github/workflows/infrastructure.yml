@@ -8,11 +8,10 @@ on:
       - '.github/workflows/infrastructure.yml'
       - '.github/workflows/ecr-repository.yml'
 
-env:
-  AWS_REGION: us-east-1
-  AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role
-
 jobs:
   upsert-ecr-repository:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/ecr-repository.yml
+    with:
+      role: us-east-1
+      region: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role

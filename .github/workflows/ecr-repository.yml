@@ -1,12 +1,14 @@
 name: Deploy ECR Repository
 
-env:
-  AWS_REGION: us-east-1
-  AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role
-
 on:
   workflow_call:
     inputs:
+      region:
+        type: string
+        required: true
+      role:
+        type: string
+        required: true
 
 jobs:
   upsert-ecr-repository:
@@ -17,8 +19,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
-          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ inputs.role }}
+          aws-region: ${{ inputs.region }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
