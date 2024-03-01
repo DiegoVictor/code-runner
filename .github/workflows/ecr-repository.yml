@@ -1,11 +1,6 @@
-name: Pipeline
-
-on:
-  push:
-    branches: [main]
+name: Deploy ECR Repository
 
 env:
-  AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
   AWS_REGION: us-east-1
   AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role
 
@@ -28,4 +23,3 @@ jobs:
           sam deploy --stack-name code-runner-infrastructure \
             --template infrastructure.yml \
             --no-fail-on-empty-changeset
-
