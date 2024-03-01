@@ -10,7 +10,6 @@ on:
 
 jobs:
   upsert-ecr-repository:
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/ecr-repository.yml
     with:
       role: us-east-1
