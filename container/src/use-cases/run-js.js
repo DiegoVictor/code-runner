@@ -1,12 +1,12 @@
 const { randomUUID } = require("node:crypto");
 const { writeFile } = require("node:fs/promises");
 const { getCodeByChallengeId } = require("../common/file");
-const { LANGUAGE } = require("../common/constants");
+const { EXTENSIONS_PER_LANGUAGE } = require("../common/constants");
 
 const main = async ({ code, challengeId }) => {
   const raw = await getCodeByChallengeId({
     challengeId,
-    language: LANGUAGE.JS,
+    language: EXTENSIONS_PER_LANGUAGE.JS.toLowerCase(),
   });
   const challenge = raw.replace(/\/\/\s@code\-here/i, code);
 
