@@ -10,7 +10,7 @@ const LANGUAGE = {
 };
 
 const EXTENSIONS_PER_LANGUAGE = {
-  JS: "js",
+  JAVASCRIPT: "js",
   PYTHON: "py",
   GO: "go",
 };
