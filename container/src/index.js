@@ -16,10 +16,10 @@ const handler = async (event) => {
   }
 
   const runner = runners[LANGUAGE[language]];
-  const { challengeId, code } = event.body;
+  const { code, inputs } = event.body;
 
   const result = await runner({
-    challengeId,
+    inputs,
     code,
   });
 

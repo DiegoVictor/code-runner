@@ -3,7 +3,7 @@ const { writeFile } = require("node:fs/promises");
 const { getTemplateByLanguage } = require("../common/file");
 const { LANGUAGE } = require("../common/constants");
 
-const main = async ({ code, challengeId }) => {
+const main = async ({ code, inputs }) => {
   const raw = await getTemplateByLanguage({
     language: LANGUAGE.JS,
   });
@@ -14,7 +14,7 @@ const main = async ({ code, challengeId }) => {
   await writeFile(filename, content);
 
   const { main } = require(filename);
-  return main();
+  return main(inputs);
 };
 
 module.exports.main = main;
