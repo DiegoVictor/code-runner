@@ -9,11 +9,11 @@ const LANGUAGE = {
   GOLANG: "GO",
 };
 
-const EXTENSIONS_PER_LANGUAGE = {
+const EXTENSION = {
   JAVASCRIPT: "js",
   PYTHON: "py",
   GO: "go",
 };
 
-module.exports.EXTENSIONS_PER_LANGUAGE = EXTENSIONS_PER_LANGUAGE;
+module.exports.EXTENSION = EXTENSION;
 module.exports.LANGUAGE = LANGUAGE;
