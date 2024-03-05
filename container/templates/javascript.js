@@ -6,7 +6,7 @@ async function executor(input) {
   };
 
   try {
-    const output = await run(...input);
+    const output = await run(input);
 
     response.output = output;
   } catch (err) {
