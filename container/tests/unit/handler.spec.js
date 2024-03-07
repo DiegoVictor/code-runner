@@ -9,6 +9,10 @@ jest.mock("../../src/use-cases/run-js", () => {
 });
 
 describe("Handler", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it("should be able to call the correct language runner", async () => {
     const language = LANGUAGE.JS;
 
