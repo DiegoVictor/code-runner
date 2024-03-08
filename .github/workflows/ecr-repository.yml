@@ -12,7 +12,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/code-runner-pipeline-role
+  AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
 
 jobs:
   upsert-ecr-repository:
