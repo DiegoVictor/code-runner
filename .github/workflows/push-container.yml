@@ -3,9 +3,9 @@ name: Push Container
 on:
   push:
     branches: [main]
-  paths:
-    - 'container/**'
-    - './.github/workflows/push-container.yml'
+    paths:
+      - 'container/**'
+      - './.github/workflows/push-container.yml'
 
 env:
   AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
