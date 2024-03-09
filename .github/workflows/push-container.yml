@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'container/**'
-      - './.github/workflows/push-container.yml'
+      - '.github/workflows/push-container.yml'
   workflow_dispatch:
 
 env:
@@ -26,29 +26,7 @@ jobs:
           npm ci
           npm run test
 
-  get-ecr-repository:
-    runs-on: ubuntu-latest
-    outputs:
-      deploy_repository: ${{ steps.cmd.outputs.deploy_repository }}
-    steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
-          aws-region: ${{ env.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Was ECR Repository deployed
-        id: cmd
-        run: |
-          deploy_repository=0
-          aws ecr describe-repositories --repository-names coderunner || deploy_repository=1
-          echo "deploy_repository=$deploy_repository" >> "$GITHUB_OUTPUT"
-
   upsert-ecr-repository:
-    needs: [get-ecr-repository]
-    if: ${{ needs.get-ecr-repository.outputs.deploy_repository == '1' }}
     uses: ./.github/workflows/ecr-repository.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
