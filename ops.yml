@@ -2,7 +2,7 @@ Resources:
   PipelineUser:
     Type: AWS::IAM::User
     Properties:
-      UserName: code-runner-pipeline-user
+      UserName: coderunner-pipeline-user
       Policies:
         - PolicyName: AssumeRole
           PolicyDocument:
@@ -30,7 +30,7 @@ Resources:
   PipelineRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: code-runner-pipeline-role
+      RoleName: coderunner-pipeline-role
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -44,22 +44,22 @@ Resources:
   PipelineRolePermissionPolicy:
     Type: AWS::IAM::Policy
     Properties:
-      PolicyName: code-runner-pipeline-role-policy
+      PolicyName: coderunner-pipeline-role-policy
       PolicyDocument:
         Version: 2012-10-17
         Statement:
           - Effect: Allow
             Action:
-              - "cloudformation:CreateChangeSet"
-              - "cloudformation:DescribeChangeSet"
-              - "cloudformation:DescribeStackEvents"
-              - "cloudformation:DescribeStacks"
-              - "cloudformation:ExecuteChangeSet"
-              - "cloudformation:GetTemplateSummary"
-              - "ecr:CreateRepository"
-              - "ecr:DeleteRepository"
-              - "ecr:SetRepositoryPolicy"
-              - "s3:CreateBucket"
+              - 'cloudformation:CreateChangeSet'
+              - 'cloudformation:DescribeChangeSet'
+              - 'cloudformation:DescribeStackEvents'
+              - 'cloudformation:DescribeStacks'
+              - 'cloudformation:ExecuteChangeSet'
+              - 'cloudformation:GetTemplateSummary'
+              - 'ecr:CreateRepository'
+              - 'ecr:DeleteRepository'
+              - 'ecr:SetRepositoryPolicy'
+              - 's3:CreateBucket'
             Resource: '*'
       Roles:
         - !Ref PipelineRole
