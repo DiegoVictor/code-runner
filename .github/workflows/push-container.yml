@@ -37,19 +37,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
-        with:
-          mask-password: "false"
-
-      - name: Checking if ECR Repository was deployed
+      - name: Was ECR Repository deployed
         run: |
-          aws ecr describe-repositories --repository-names code-runner || CREATE_REPOSITORY=1
-          echo "CREATE_REPOSITORY=$CREATE_REPOSITORY" >> $GITHUB_ENV
+          aws ecr describe-repositories --repository-names code-runner || DEPLOY_REPOSITORY=1
+          echo "DEPLOY_REPOSITORY=$DEPLOY_REPOSITORY" >> $GITHUB_ENV
 
   upsert-ecr-repository:
     needs: [has-ecr-repository]
-    if: ${{ env.CREATE_REPOSITORY }}
+    if: ${{ env.DEPLOY_REPOSITORY }}
     uses: ./.github/workflows/ecr-repository.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
