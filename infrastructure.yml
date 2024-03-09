@@ -2,7 +2,7 @@ Resources:
   CodeRunnerRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: code-runner
+      RepositoryName: coderunner
       EmptyOnDelete: true
       ImageScanningConfiguration:
         ScanOnPush: false
@@ -27,10 +27,10 @@ Resources:
   CodeRunnerBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: code-runner-bucket
+      BucketName: coderunner-bucket
 
 Outputs:
   CodeRunnerBucketName:
     Value: !Ref CodeRunnerBucket
     Export:
-      Name: !Join [ '', [ !Ref 'AWS::StackName', 'code-runner-bucket-name' ] ]
+      Name: !Join [ '', [ !Ref 'AWS::StackName', 'coderunner-bucket-name' ] ]
