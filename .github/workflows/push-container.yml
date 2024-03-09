@@ -39,12 +39,13 @@ jobs:
 
       - name: Was ECR Repository deployed
         run: |
+          DEPLOY_REPOSITORY=0
           aws ecr describe-repositories --repository-names code-runner || DEPLOY_REPOSITORY=1
           echo "DEPLOY_REPOSITORY=$DEPLOY_REPOSITORY" >> $GITHUB_ENV
 
   upsert-ecr-repository:
     needs: [has-ecr-repository]
-    if: ${{ env.DEPLOY_REPOSITORY }}
+    if: ${{ env.DEPLOY_REPOSITORY == '1' }}
     uses: ./.github/workflows/ecr-repository.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
