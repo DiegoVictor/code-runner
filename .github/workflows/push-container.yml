@@ -26,8 +26,10 @@ jobs:
           npm ci
           npm run test
 
-  has-ecr-repository:
+  get-ecr-repository:
     runs-on: ubuntu-latest
+    outputs:
+      deploy_repository: ${{ steps.cmd.outputs.deploy_repository }}
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -38,14 +40,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Was ECR Repository deployed
+        id: cmd
         run: |
-          DEPLOY_REPOSITORY=0
-          aws ecr describe-repositories --repository-names code-runner || DEPLOY_REPOSITORY=1
-          echo "DEPLOY_REPOSITORY=$DEPLOY_REPOSITORY" >> $GITHUB_ENV
+          deploy_repository=0
+          aws ecr describe-repositories --repository-names coderunner || deploy_repository=1
+          echo "deploy_repository=$deploy_repository" >> "$GITHUB_OUTPUT"
 
   upsert-ecr-repository:
     needs: [has-ecr-repository]
-    if: ${{ env.DEPLOY_REPOSITORY == '1' }}
+    if: ${{ needs.get-ecr-repository.outputs.deploy_repository == '1' }}
     uses: ./.github/workflows/ecr-repository.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -72,7 +75,7 @@ jobs:
 
       - name: Set CONTAINER_TAG and AWS_IMAGE_URI
         run: |
-          CONTAINER_TAG=code-runner:${{ github.run_id }}
+          CONTAINER_TAG=coderunner:${{ github.run_id }}
           AWS_IMAGE_URI="$AWS_REGISTRY_URI/$CONTAINER_TAG"
 
       - name: Push Image
