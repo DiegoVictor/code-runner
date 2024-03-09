@@ -1,0 +1,86 @@
+name: Push Container
+
+on:
+  push:
+    branches: [main]
+  paths:
+    - 'container/**'
+    - './.github/workflows/push-container.yml'
+
+env:
+  AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+  AWS_REGION: us-east-1
+  AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          cd container
+          npm ci
+          npm run test
+
+  has-ecr-repository:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: "false"
+
+      - name: Checking if ECR Repository was deployed
+        run: |
+          aws ecr describe-repositories --repository-names code-runner || CREATE_REPOSITORY=1
+          echo "CREATE_REPOSITORY=$CREATE_REPOSITORY" >> $GITHUB_ENV
+
+  upsert-ecr-repository:
+    needs: [has-ecr-repository]
+    if: ${{ env.CREATE_REPOSITORY }}
+    uses: ./.github/workflows/ecr-repository.yml
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  push-image:
+    runs-on: ubuntu-latest
+    needs: [unit-test, upsert-ecr-repository]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: "false"
+
+      - name: Set CONTAINER_TAG and AWS_IMAGE_URI
+        run: |
+          CONTAINER_TAG=code-runner:${{ github.run_id }}
+          AWS_IMAGE_URI="$AWS_REGISTRY_URI/$CONTAINER_TAG"
+
+      - name: Push Image
+        run: |
+          cd container
+          docker build --platform linux/amd64 -t $CONTAINER_TAG .
+          docker tag $CONTAINER_TAG $AWS_IMAGE_URI
+          docker push $AWS_IMAGE_URI
