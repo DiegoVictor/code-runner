@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TIMESTAMP=$(date +%s)
-CONTAINER_TAG="code-runner:$TIMESTAMP"
+CONTAINER_TAG="coderunner:$TIMESTAMP"
 
 cd container
 
