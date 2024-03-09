@@ -7,6 +7,8 @@ on:
       - 'infrastructure.yml'
       - '.github/workflows/infrastructure.yml'
       - '.github/workflows/ecr-repository.yml'
+  workflow_dispatch:
+
 
 jobs:
   upsert-ecr-repository:
