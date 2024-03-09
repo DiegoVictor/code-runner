@@ -47,7 +47,7 @@ jobs:
           echo "deploy_repository=$deploy_repository" >> "$GITHUB_OUTPUT"
 
   upsert-ecr-repository:
-    needs: [has-ecr-repository]
+    needs: [get-ecr-repository]
     if: ${{ needs.get-ecr-repository.outputs.deploy_repository == '1' }}
     uses: ./.github/workflows/ecr-repository.yml
     secrets:
