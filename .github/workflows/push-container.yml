@@ -52,10 +52,15 @@ jobs:
         with:
           mask-password: "false"
 
-      - name: Set CONTAINER_TAG and AWS_IMAGE_URI
+      - name: Set CONTAINER_TAG
         run: |
           CONTAINER_TAG=coderunner:${{ github.run_id }}
+          echo "CONTAINER_TAG=$CONTAINER_TAG" >> "$GITHUB_ENV"
+
+      - name: Set AWS_IMAGE_URI
+        run: |
           AWS_IMAGE_URI="$AWS_REGISTRY_URI/$CONTAINER_TAG"
+          echo "AWS_IMAGE_URI=$AWS_IMAGE_URI" >> "$GITHUB_ENV"
 
       - name: Push Image
         run: |
