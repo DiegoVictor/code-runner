@@ -1,12 +1,14 @@
 name: Push Container
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'container/**'
-      - '.github/workflows/push-container.yml'
-  workflow_dispatch:
+  workflow_call:
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      AWS_ACCOUNT_ID:
+        required: true
 
 env:
   AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
