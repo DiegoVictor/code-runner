@@ -9,6 +9,7 @@ on:
       - 'src/**'
       - 'container/**'
       - 'template.yml'
+  workflow_dispatch:
 
 env:
   AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
