@@ -52,5 +52,6 @@ jobs:
           sam deploy --stack-name coderunner-dev \
             --no-fail-on-empty-changeset \
             --image-repositories CodeRunnerFunction=$REPOSITORY_URI \
+            --capabilities CAPABILITY_IAM \
             --parameter-overrides \
               ImageUri=$REPOSITORY_URI:${{ github.run_id }}
