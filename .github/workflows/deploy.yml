@@ -45,7 +45,7 @@ jobs:
 
       - name: Set REPOSITORY_URI
         run: |
-          REPOSITORY_URI=$AWS_REGISTRY_URI/code-runner
+          REPOSITORY_URI=$AWS_REGISTRY_URI/coderunner
           echo "REPOSITORY_URI=$REPOSITORY_URI" >> "$GITHUB_ENV"
 
       - name: Deploy template.yml
