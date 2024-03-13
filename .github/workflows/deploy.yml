@@ -54,6 +54,6 @@ jobs:
             --no-fail-on-empty-changeset \
             --image-repositories CodeRunnerFunction=$REPOSITORY_URI \
             --capabilities CAPABILITY_IAM \
-            --role-arn ${CLOUDFORMATION_ROLE_ARN}
+            --role-arn ${CLOUDFORMATION_ROLE_ARN} \
             --parameter-overrides \
               ImageUri=${{ env.REPOSITORY_URI }}:${{ github.run_id }}
