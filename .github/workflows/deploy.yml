@@ -56,4 +56,4 @@ jobs:
             --capabilities CAPABILITY_IAM \
             --role-arn ${CLOUDFORMATION_ROLE_ARN}
             --parameter-overrides \
-              ImageUri=$REPOSITORY_URI:${{ github.run_id }}
+              ImageUri=${{ env.REPOSITORY_URI }}:${{ github.run_id }}
