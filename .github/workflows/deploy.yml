@@ -15,6 +15,7 @@ env:
   AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
   AWS_REGION: us-east-1
   AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
+  REPOSITORY_NAME: coderunner
   CLOUDFORMATION_ROLE_ARN: arn:aws:iam::254837279431:role/coderunner-cloudformation-role
 
 jobs:
@@ -45,7 +46,7 @@ jobs:
 
       - name: Set REPOSITORY_URI
         run: |
-          REPOSITORY_URI=$AWS_REGISTRY_URI/coderunner
+          REPOSITORY_URI=$AWS_REGISTRY_URI/$REPOSITORY_NAME
           echo "REPOSITORY_URI=$REPOSITORY_URI" >> "$GITHUB_ENV"
 
       - name: Deploy template.yml
