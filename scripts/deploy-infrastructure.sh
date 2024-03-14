@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sam deploy --stack-name code-runner-infrastructure \
+sam deploy --stack-name coderunner-infrastructure \
   --template infrastructure.yml \
   --no-fail-on-empty-changeset
