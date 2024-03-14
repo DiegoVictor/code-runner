@@ -58,3 +58,34 @@ jobs:
             --role-arn ${CLOUDFORMATION_ROLE_ARN} \
             --parameter-overrides \
               ImageUri=${{ env.REPOSITORY_URI }}:${{ github.run_id }}
+
+  delete-outdated-image:
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Delete images from ECR Repository
+        run: |
+          IMAGE_ID=$(aws ecr describe-images \
+            --repository-name $REPOSITORY_NAME \
+            --query "sort_by(imageDetails, &imagePushedAt) | reverse(@) | [1:].{imageId:imageTags[0]}")
+
+          for row in $(echo "${IMAGE_ID}" | jq -r '.[] | @base64'); do
+            _jq() {
+              echo ${row} | base64 --decode | jq -r ${1}
+            }
+            aws ecr batch-delete-image \
+              --repository-name $REPOSITORY_NAME \
+              --image-ids imageTag=$(_jq '.imageId')
+          done
