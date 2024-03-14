@@ -7,22 +7,25 @@ Resources:
       ImageScanningConfiguration:
         ScanOnPush: false
       RepositoryPolicyText:
-        Version: "2012-10-17"
+        Version: '2012-10-17'
         Statement:
           - Effect: Allow
             Principal:
               Service: lambda.amazonaws.com
             Action:
-              - "ecr:BatchGetImage"
-              - "ecr:DeleteRepositoryPolicy"
-              - "ecr:GetDownloadUrlForLayer"
-              - "ecr:GetRepositoryPolicy"
-              - "ecr:SetRepositoryPolicy"
-              - "ecr:BatchCheckLayerAvailability"
-              - "ecr:CompleteLayerUpload"
-              - "ecr:InitiateLayerUpload"
-              - "ecr:PutImage"
-              - "ecr:UploadLayerPart"
+              - 'ecr:BatchGetImage'
+              - 'ecr:DeleteRepositoryPolicy'
+              - 'ecr:DescribeImages'
+              - 'ecr:DescribeRepositories'
+              - 'ecr:GetDownloadUrlForLayer'
+              - 'ecr:GetRepositoryPolicy'
+              - 'ecr:ListImages'
+              - 'ecr:SetRepositoryPolicy'
+              - 'ecr:BatchCheckLayerAvailability'
+              - 'ecr:CompleteLayerUpload'
+              - 'ecr:InitiateLayerUpload'
+              - 'ecr:PutImage'
+              - 'ecr:UploadLayerPart'
 
   CodeRunnerBucket:
     Type: AWS::S3::Bucket
