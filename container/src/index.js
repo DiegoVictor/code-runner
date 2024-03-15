@@ -1,9 +1,14 @@
 const { LANGUAGE } = require("./common/constants");
 const { HTTP } = require("./common/response");
+const { compile } = require("./helpers/typescript");
 const { main: JAVASCRIPT } = require("./use-cases/run-js");
+
+const TYPESCRIPT = ({ code, inputs }) =>
+  JAVASCRIPT({ code: compile(code), inputs });
 
 const runners = {
   JAVASCRIPT,
+  TYPESCRIPT,
 };
 
 const handler = async (event) => {
