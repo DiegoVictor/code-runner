@@ -1,3 +1,4 @@
+const { transpile } = require("typescript");
 const { handler } = require("../../src");
 const { LANGUAGE } = require("../../src/common/constants");
 
@@ -13,7 +14,7 @@ describe("Handler", () => {
     jest.resetAllMocks();
   });
 
-  it("should be able to call the correct language runner", async () => {
+  it("should be able to call JavaScript runner", async () => {
     const language = LANGUAGE.JS;
 
     async function run(value) {
@@ -35,6 +36,38 @@ describe("Handler", () => {
     expect(mockMain).toHaveBeenCalledWith({
       inputs,
       code: run.toString(),
+    });
+    expect(response).toStrictEqual({
+      statusCode: 200,
+      body: JSON.stringify(output),
+    });
+  });
+
+  it("should be able to call TypeScript runner", async () => {
+    const language = LANGUAGE.TS;
+
+    const code =
+      "async function run(value: number): number {\n  return value * value;\n}";
+
+    const output = [{ input: 5, output: 25 }];
+    mockMain.mockResolvedValueOnce(output);
+
+    const inputs = [{ value: 5 }];
+    const response = await handler({
+      body: {
+        language,
+        code,
+        inputs,
+      },
+    });
+
+    expect(mockMain).toHaveBeenCalledWith({
+      inputs,
+      code: transpile(code, {
+        lib: ["ES2023"],
+        module: "node16",
+        target: "ES2022",
+      }),
     });
     expect(response).toStrictEqual({
       statusCode: 200,
