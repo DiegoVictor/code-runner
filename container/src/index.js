@@ -2,6 +2,7 @@ const { LANGUAGE } = require("./common/constants");
 const { HTTP } = require("./common/response");
 const { compile } = require("./helpers/typescript");
 const { main: JAVASCRIPT } = require("./use-cases/run-js");
+const { main: PYTHON } = require("./use-cases/run-python");
 
 const TYPESCRIPT = ({ code, inputs }) =>
   JAVASCRIPT({ code: compile(code), inputs });
@@ -9,6 +10,7 @@ const TYPESCRIPT = ({ code, inputs }) =>
 const runners = {
   JAVASCRIPT,
   TYPESCRIPT,
+  PYTHON,
 };
 
 const handler = async (event) => {
