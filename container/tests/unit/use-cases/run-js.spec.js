@@ -16,14 +16,16 @@ jest.mock("node:fs/promises", () => {
 });
 
 const mockRandomUUID = jest.fn();
+
+const uuid = "6c095a0d-b1da-40cc-aa0b-96580ef29b01";
+mockRandomUUID.mockReturnValueOnce(uuid);
+
 jest.mock("node:crypto", () => {
   return {
     randomUUID: () => mockRandomUUID(),
   };
 });
 
-const uuid = "6c095a0d-b1da-40cc-aa0b-96580ef29b01";
-mockRandomUUID.mockReturnValueOnce(uuid);
 const mockMain = jest.fn();
 jest.mock(
   `/tmp/6c095a0d-b1da-40cc-aa0b-96580ef29b01.js`,
@@ -52,17 +54,22 @@ describe("Run JS Use Case", () => {
     const code = run.toString();
 
     const value = inputs[0].value;
-    mockMain.mockResolvedValueOnce([{ input: value, output: run(value) }]);
+    const expected = [{ input: value, output: run(value) }];
+
+    mockMain.mockResolvedValueOnce(expected);
 
     const response = await main({ code, inputs });
 
     expect(mockGetTemplateByLanguage).toHaveBeenCalledWith({
       language: LANGUAGE.JS,
     });
+
+    const fileName = `/tmp/${uuid}.js`;
     expect(mockWriteFile).toHaveBeenCalledWith(
-      expect.stringMatching(`/tmp/${uuid}.js`),
+      expect.stringMatching(fileName),
       code
     );
-    expect(response);
+    expect(mockMain).toHaveBeenCalledWith(inputs);
+    expect(response).toStrictEqual(expected);
   });
 });
