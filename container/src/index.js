@@ -1,6 +1,7 @@
 const { LANGUAGE } = require("./common/constants");
 const { HTTP } = require("./common/response");
 const { compile } = require("./helpers/typescript");
+const { main: GO } = require("./use-cases/run-go");
 const { main: JAVASCRIPT } = require("./use-cases/run-js");
 const { main: PYTHON } = require("./use-cases/run-python");
 
@@ -11,6 +12,7 @@ const runners = {
   JAVASCRIPT,
   TYPESCRIPT,
   PYTHON,
+  GO,
 };
 
 const handler = async (event) => {
