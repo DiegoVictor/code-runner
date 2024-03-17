@@ -27,8 +27,3 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-Outputs:
-  CodeRunnerBucketName:
-    Value: !Ref CodeRunnerBucket
-    Export:
-      Name: !Join [ '', [ !Ref 'AWS::StackName', 'coderunner-bucket-name' ] ]
