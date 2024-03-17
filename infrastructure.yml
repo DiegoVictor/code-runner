@@ -27,11 +27,6 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  CodeRunnerBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: coderunner-bucket
-
 Outputs:
   CodeRunnerBucketName:
     Value: !Ref CodeRunnerBucket
