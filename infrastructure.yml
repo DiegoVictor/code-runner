@@ -1,8 +1,3 @@
-Parameters:
-  DbClusterUsername:
-    Type: String
-    Description: Username for RDS Cluster
-
 Resources:
   CodeRunnerRepository:
     Type: AWS::ECR::Repository
@@ -32,11 +27,13 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  DbClusterPassword:
+  DbClusterCredentials:
     Type: AWS::SecretsManager::Secret
     Properties:
       GenerateSecretString:
-        PasswordLength: 16
+        SecretStringTemplate: '{"username": "app-user"}'
+        GenerateStringKey: password
+        PasswordLength: 30
         ExcludeCharacters: '"@/\'
 
   CodeRunnerRdsDbCluster:
