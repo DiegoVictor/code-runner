@@ -27,3 +27,9 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
+  DbClusterPassword:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      GenerateSecretString:
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
