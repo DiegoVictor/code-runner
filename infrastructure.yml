@@ -1,3 +1,8 @@
+Parameters:
+  DbClusterUsername:
+    Type: String
+    Description: Username for RDS Cluster
+
 Resources:
   CodeRunnerRepository:
     Type: AWS::ECR::Repository
@@ -33,3 +38,15 @@ Resources:
       GenerateSecretString:
         PasswordLength: 16
         ExcludeCharacters: '"@/\'
+
+  CodeRunnerRdsDbCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      DatabaseName: coderunner
+      DBClusterIdentifier: coderunner-dbcluster
+      EnableHttpEndpoint: true
+      Engine: aurora-postgresql
+      EngineMode: provisioned
+      EngineVersion: 16.1
+      MasterUsername: !Ref DbClusterUsername
+      MasterUserPassword: !GetAtt DbClusterPassword.SecretString
