@@ -81,6 +81,7 @@ Resources:
               - 'lambda:CreateFunction'
               - 'lambda:DeleteFunction'
               - 'lambda:TagResource'
+              - 'secretsmanager:GetSecretValue'
               - 's3:CreateBucket'
               - 's3:DeleteBucket'
             Resource: '*'
