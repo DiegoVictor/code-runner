@@ -45,5 +45,5 @@ Resources:
       Engine: aurora-postgresql
       EngineMode: provisioned
       EngineVersion: 16.1
-      MasterUsername: !GetAtt DbClusterCredentials.SecretString.username
+      MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
