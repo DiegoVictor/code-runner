@@ -46,4 +46,4 @@ Resources:
       EngineMode: provisioned
       EngineVersion: 16.1
       MasterUsername: !GetAtt DbClusterCredentials.SecretString.username
-      MasterUserPassword: !GetAtt DbClusterCredentials.SecretString.password
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
