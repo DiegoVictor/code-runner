@@ -50,6 +50,6 @@ Resources:
 
 Outputs:
   DbClusterCredentialsArn:
-    Value: !Ref DbClusterCredentialsArn
+    Value: !Ref DbClusterCredentials
     Export:
       Name: coderunner-DbClusterCredentialsArn
