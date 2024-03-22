@@ -47,3 +47,9 @@ Resources:
       EngineVersion: 16.1
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
+
+Outputs:
+  DbClusterCredentialsArn:
+    Value: !Ref DbClusterCredentialsArn
+    Export:
+      Name: coderunner-DbClusterCredentialsArn
