@@ -28,8 +28,8 @@ jobs:
           npm ci
           npm run test
 
-  upsert-ecr-repository:
-    uses: ./.github/workflows/ecr-repository.yml
+  deploy-infrastructure:
+    uses: ./.github/workflows/upsert-infrastructure.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -37,7 +37,7 @@ jobs:
 
   push-image:
     runs-on: ubuntu-latest
-    needs: [unit-test, upsert-ecr-repository]
+    needs: [unit-test, deploy-infrastructure]
     steps:
       - uses: actions/checkout@v4
 

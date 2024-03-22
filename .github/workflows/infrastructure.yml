@@ -11,8 +11,8 @@ on:
 
 
 jobs:
-  upsert-ecr-repository:
-    uses: ./.github/workflows/ecr-repository.yml
+  deploy-infrastructure:
+    uses: ./.github/workflows/upsert-infrastructure.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

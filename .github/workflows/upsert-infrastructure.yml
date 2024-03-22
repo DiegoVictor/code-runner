@@ -1,4 +1,4 @@
-name: Deploy ECR Repository
+name: Deploy Infrastructure
 
 on:
   workflow_call:
@@ -15,7 +15,7 @@ env:
   AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
 
 jobs:
-  upsert-ecr-repository:
+  upsert-infrastructure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
