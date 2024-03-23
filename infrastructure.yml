@@ -48,6 +48,12 @@ Resources:
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
 
+  CodeRunnerRdsDbInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
+      Engine: aurora-postgresql
+
 Outputs:
   DbClusterCredentialsArn:
     Value: !Ref DbClusterCredentials
