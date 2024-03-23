@@ -47,6 +47,7 @@ Resources:
       EngineVersion: 16.1
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
+      Port: 5432
 
   CodeRunnerRdsDbInstance:
     Type: AWS::RDS::DBInstance
@@ -54,7 +55,6 @@ Resources:
       DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
       DBInstanceClass: db.r5.large
       Engine: aurora-postgresql
-      Port: 5432
 
 Outputs:
   DbClusterCredentialsArn:
