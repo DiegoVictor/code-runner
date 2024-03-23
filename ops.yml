@@ -85,6 +85,7 @@ Resources:
               - 'rds:CreateDBInstance'
               - 'rds:DeleteDBInstance'
               - 'rds:DescribeDBClusters'
+              - 'rds:DescribeDBInstances'
               - 'secretsmanager:GetRandomPassword'
               - 'secretsmanager:GetSecretValue'
               - 'secretsmanager:UpdateSecret'
