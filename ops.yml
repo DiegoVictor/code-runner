@@ -82,6 +82,8 @@ Resources:
               - 'lambda:DeleteFunction'
               - 'lambda:TagResource'
               - 'rds:CreateDBCluster'
+              - 'rds:CreateDBInstance'
+              - 'rds:DeleteDBInstance'
               - 'rds:DescribeDBClusters'
               - 'secretsmanager:GetRandomPassword'
               - 'secretsmanager:GetSecretValue'
