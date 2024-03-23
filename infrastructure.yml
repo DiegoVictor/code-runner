@@ -52,8 +52,9 @@ Resources:
     Type: AWS::RDS::DBInstance
     Properties:
       DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
-      Engine: aurora-postgresql
       DBInstanceClass: db.r5.large
+      Engine: aurora-postgresql
+      Port: 5432
 
 Outputs:
   DbClusterCredentialsArn:
