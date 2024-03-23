@@ -53,6 +53,7 @@ Resources:
     Properties:
       DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
       Engine: aurora-postgresql
+      DBInstanceClass: db.r5.large
 
 Outputs:
   DbClusterCredentialsArn:
