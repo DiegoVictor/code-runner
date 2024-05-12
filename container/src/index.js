@@ -16,7 +16,7 @@ const runners = {
 };
 
 const handler = async (event) => {
-  const language = event.body.language.toUpperCase();
+  const language = event.language.toUpperCase();
 
   if (!Object.keys(LANGUAGE).includes(language)) {
     return HTTP.BAD_REQUEST({
@@ -25,7 +25,7 @@ const handler = async (event) => {
   }
 
   const runner = runners[LANGUAGE[language]];
-  const { code, inputs } = event.body;
+  const { code, inputs } = event;
 
   const result = await runner({
     inputs,
