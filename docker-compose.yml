@@ -1,0 +1,30 @@
+services:
+  pg:
+    image: postgres
+    container_name: pg
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: code-runner
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+  code-runner:
+    build:
+      dockerfile: ./container
+      context: ./container
+    ports:
+      - 9000:8080
+    volumes:
+      - .:/var/task
+    networks:
+      - app_network
+volumes:
+  pgdata:
+    driver: local
+networks:
+  app_network:
+    driver: bridge
