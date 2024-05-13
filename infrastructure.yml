@@ -48,7 +48,6 @@ Resources:
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
       Port: 5432
-      PubliclyAccessible: true
 
   CodeRunnerRdsDbInstance:
     Type: AWS::RDS::DBInstance
