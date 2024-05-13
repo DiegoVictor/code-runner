@@ -26,11 +26,9 @@ describe("Handler", () => {
 
     const inputs = [{ value: 5 }];
     const response = await handler({
-      body: {
-        language,
-        code: run.toString(),
-        inputs,
-      },
+      language,
+      code: run.toString(),
+      inputs,
     });
 
     expect(mockMain).toHaveBeenCalledWith({
@@ -54,11 +52,9 @@ describe("Handler", () => {
 
     const inputs = [{ value: 5 }];
     const response = await handler({
-      body: {
-        language,
-        code,
-        inputs,
-      },
+      language,
+      code,
+      inputs,
     });
 
     expect(mockMain).toHaveBeenCalledWith({
@@ -84,11 +80,9 @@ describe("Handler", () => {
 
     const inputs = [{ value: 5 }];
     const response = await handler({
-      body: {
-        language,
-        code: run.toString(),
-        inputs,
-      },
+      language,
+      code: run.toString(),
+      inputs,
     });
 
     expect(mockMain).not.toHaveBeenCalled();
