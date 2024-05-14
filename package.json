@@ -1,4 +1,11 @@
 {
   "name": "code-runner",
   "version": "1.0.0",
+  "scripts": {
+    "dev:server": "nodemon --exec \"node --env-file=.env src/index.js\""
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "nodemon": "^3.1.0"
+  }
 }
