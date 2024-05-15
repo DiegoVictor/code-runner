@@ -13,3 +13,20 @@ Resources:
       ImageUri: !Ref ImageUri
       MemorySize: 512
       Timeout: 30
+
+  MainFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/index.js
+      MemorySize: 256
+      Runtime: nodejs20.x
+      Timeout: 30
+      Environment:
+        Variables:
+          CODE_RUNNER_FUNCTION_NAME: !Ref CodeRunnerFunction
+      Events:
+        Proxy:
+          Type: Api
+          Properties:
+            Method: ANY
+            Path: /{proxy+}
