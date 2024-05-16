@@ -1,6 +1,29 @@
 const serverless = require("serverless-http");
 const express = require("express");
 
+require("express-async-errors");
+
+const { ZodError } = require("zod");
+const { env } = require("./env");
+
 const app = express();
+
+app.use(express.json());
+
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      message: "Validation Error",
+      error: err.errors,
+    });
+  }
+
+  return res.status(500).json({
+    error: err.message,
+  });
+});
+
 
 module.exports.handler = serverless(app);
