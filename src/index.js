@@ -25,5 +25,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+if (env.PORT && env.NODE_ENV === "dev") {
+  app.listen(env.PORT, () => {
+    console.log(`Running on port ${env.PORT}`);
+  });
+}
 
 module.exports.handler = serverless(app);
