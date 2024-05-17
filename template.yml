@@ -14,7 +14,7 @@ Resources:
       MemorySize: 512
       Timeout: 30
 
-  MainFunction:
+  ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/index.js
