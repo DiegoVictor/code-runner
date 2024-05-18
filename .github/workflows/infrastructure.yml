@@ -6,7 +6,7 @@ on:
     paths:
       - 'infrastructure.yml'
       - '.github/workflows/infrastructure.yml'
-      - '.github/workflows/ecr-repository.yml'
+      - '.github/workflows/upsert-infrastructure.yml'
   workflow_dispatch:
 
 
