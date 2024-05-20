@@ -1,6 +1,7 @@
 {
   "name": "code-runner",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev:server": "nodemon --exec \"node --env-file=.env src/index.js\""
   },
