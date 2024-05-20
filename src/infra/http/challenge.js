@@ -46,4 +46,33 @@ app.get("/challenges/:id", async (req, res) => {
   });
 });
 
+app.post("/challenges", async (req, res) => {
+  const { title, description, instructions, inputs } = z
+    .object({
+      title: z.string().min(3),
+      description: z.string().min(10),
+      instructions: z.string().min(1),
+      inputs: z
+        .array(
+          z
+            .object({
+              value: z.any(),
+              expected: z.any(),
+            })
+            .refine(
+              (data) => {
+                return data.value && data.expected;
+              },
+              { message: "value and expected properties are required" }
+            )
+        )
+        .min(1),
+    })
+    .parse(req.body);
+
+  await challengeRepository.save({ title, description, instructions, inputs });
+
+  return res.sendStatus(201);
+});
+
 module.exports.challenges = app;
