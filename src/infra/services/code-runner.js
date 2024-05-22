@@ -1,3 +1,4 @@
+const { Lambda } = require("@aws-sdk/client-lambda");
 const { env } = require("../../env");
 
 const run = async ({ language, code, inputs }) => {
@@ -19,6 +20,18 @@ const run = async ({ language, code, inputs }) => {
     });
   }
 
+  const client = new Lambda();
+  const { Payload } = await client.invoke({
+    FunctionName: env.CODERUNNER_FUNCTION,
+    Payload: JSON.stringify({
+      language,
+      code,
+      inputs,
+    }),
+  });
+  const { body } = JSON.parse(Buffer.from(Payload).toString("utf-8"));
+
+  return JSON.parse(body);
 };
 
 module.exports = {
