@@ -14,8 +14,7 @@ services:
       - app_network
   code-runner:
     build:
-      dockerfile: ./container
-      context: ./container
+      dockerfile: ./container/Dockerfile
     ports:
       - 9000:8080
     volumes:
