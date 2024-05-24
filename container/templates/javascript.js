@@ -1,12 +1,13 @@
 // @code-here
 
-async function executor(input) {
+async function executor({ id, value }) {
   const response = {
-    input,
+    id,
+    value,
   };
 
   try {
-    const output = await run(input);
+    const output = await run(value);
 
     response.output = output;
   } catch (err) {

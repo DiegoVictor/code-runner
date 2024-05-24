@@ -4,12 +4,14 @@ import sys
 # @code-here
 
 def executor(input):
+  id, value = input.values()
   response = {
-    'input': input,
+    'id': id,
+    'value': value,
   }
 
   try:
-    output = run(input)
+    output = run(value)
 
     response['output'] = output
   except Exception as err:

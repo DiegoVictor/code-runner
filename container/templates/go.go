@@ -8,17 +8,24 @@ import (
 
 // @code-here
 
+type Request struct {
+  Id string `json:"id"`
+  Value interface{} `json:"value"`
+}
+
 type Response struct {
-  Input interface{} `json:"input"`
+  Id interface{} `json:"id"`
+  Value interface{} `json:"value"`
   Output interface{} `json:"output"`
 }
 
-func executor(input interface{}) Response {
+func executor(input Request) Response {
   response := Response{
-    Input: input,
+    Id: input.Id,
+    Value: input.Value,
   }
 
-  output, err := run(input)
+  output, err := run(input.Value)
   if err != nil {
     fmt.Println(err.Error())
     response.Output = err.Error()
@@ -30,7 +37,7 @@ func executor(input interface{}) Response {
 }
 
 func main() {
-  var inputs []interface{}
+  var inputs []Request
 
   err := json.Unmarshal([]byte(os.Args[1]), &inputs)
   if err != nil {
