@@ -8,7 +8,6 @@ const find = async ({ take, cursor }) => {
         id: true,
         title: true,
         description: true,
-        instructions: true,
         createdAt: true,
         updatedAt: true,
       },
