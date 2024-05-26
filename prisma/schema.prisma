@@ -13,14 +13,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum LanguageCode {
+  js
+  ts
+  python
+  go
+}
+
+model Language {
+  id         String       @id @default(uuid())
+  name       String       @db.VarChar(20)
+  code       LanguageCode
+  template   String // Code Template
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  challenges Challenge[]  @relation("challenges_languages")
+
+  @@map("languages")
+}
+
 model Challenge {
-  id           String   @id @default(uuid())
-  title        String   @db.VarChar(100)
-  description  String   @db.VarChar(255)
+  id           String     @id @default(uuid())
+  languages    Language[] @relation("challenges_languages")
+  title        String     @db.VarChar(100)
+  description  String     @db.VarChar(255)
   instructions String // Rich Text
-  inputs       Json     @db.Json
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  inputs       Json       @db.Json
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@map("challenges")
 }
