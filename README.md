@@ -10,3 +10,12 @@ How would you run user's code in a safe way? This application is my answer, code
 
 ![Infrastructure Diagram](https://raw.githubusercontent.com/DiegoVictor/code-runner/main/code-runner.drawio.png)
 
+
+# Requirements
+* Node.js ^20.9.0
+* Serveless Framework
+* AWS Account
+  * [Elastic Container Registry](https://aws.amazon.com/ecr/)
+  * [Lambda](https://aws.amazon.com/lambda)
+  * [API Gateway](https://aws.amazon.com/api-gateway/)
+
