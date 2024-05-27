@@ -38,13 +38,22 @@ const findOneById = async (id) => {
   return challenge;
 };
 
-const save = async ({ title, description, instructions, inputs }) => {
+const save = async ({
+  title,
+  description,
+  instructions,
+  inputs,
+  languages,
+}) => {
   await prisma.challenge.create({
     data: {
       title,
       description,
       instructions,
       inputs,
+      languages: {
+        connect: languages,
+      },
     },
   });
 };

@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const { z } = require("zod");
 const { challengeRepository } = require("../database/repositories/challenge");
+const { languageRepository } = require("../database/repositories/language");
+const { LANGUAGE } = require("../../common/language");
 
 const app = Router();
 
@@ -53,15 +55,23 @@ app.get("/challenges/:id", async (req, res) => {
 });
 
 app.post("/challenges", async (req, res) => {
-  const { title, description, instructions, inputs } = z
+  const {
+    title,
+    description,
+    instructions,
+    inputs,
+    languages: code,
+  } = z
     .object({
       title: z.string().min(3),
       description: z.string().min(10),
       instructions: z.string().min(1),
+      languages: z.array(z.enum(Object.values(LANGUAGE))),
       inputs: z
         .array(
           z
             .object({
+              id: z.string().cuid(),
               value: z.any(),
               expected: z.any(),
             })
@@ -76,7 +86,14 @@ app.post("/challenges", async (req, res) => {
     })
     .parse(req.body);
 
-  await challengeRepository.save({ title, description, instructions, inputs });
+  const languages = await languageRepository.findBy({ code });
+  await challengeRepository.save({
+    title,
+    description,
+    instructions,
+    inputs,
+    languages,
+  });
 
   return res.sendStatus(201);
 });
