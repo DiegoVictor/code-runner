@@ -35,12 +35,18 @@ app.get("/challenges/:id", async (req, res) => {
     });
   }
 
-  const { title, description, instructions, createdAt, updatedAt } = challenge;
+  const { title, description, instructions, languages, createdAt, updatedAt } =
+    challenge;
   return res.status(200).json({
     id,
     title,
     description,
     instructions,
+    languages: languages.map((language) => ({
+      name: language.name,
+      code: language.code,
+      template: language.template,
+    })),
     createdAt,
     updatedAt,
   });

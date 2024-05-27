@@ -30,6 +30,9 @@ const find = async ({ take, cursor }) => {
 const findOneById = async (id) => {
   const challenge = await prisma.challenge.findFirst({
     where: { id },
+    include: {
+      languages: true,
+    },
   });
 
   return challenge;
