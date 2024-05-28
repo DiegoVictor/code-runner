@@ -13,8 +13,8 @@ app.post("/challenges/:id/solution", async (req, res) => {
       code: z.string().min(1),
       language: z
         .string()
-        .toUpperCase()
-        .pipe(z.enum(Object.keys(LANGUAGE))),
+        .toLowerCase()
+        .pipe(z.enum(Object.values(LANGUAGE))),
     })
     .parse({ ...req.params, ...req.body });
 
