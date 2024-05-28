@@ -5,11 +5,15 @@ require("express-async-errors");
 
 const { ZodError } = require("zod");
 const { env } = require("./env");
+const { challenges } = require("./infra/http/challenge");
+const { solution } = require("./infra/http/solution");
 
 const app = express();
 
 app.use(express.json());
 
+app.use(challenges);
+app.use(solution);
 
 app.use((err, req, res, next) => {
   console.log(err);
