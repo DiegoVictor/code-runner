@@ -19,3 +19,32 @@ How would you run user's code in a safe way? This application is my answer, code
   * [Lambda](https://aws.amazon.com/lambda)
   * [API Gateway](https://aws.amazon.com/api-gateway/)
 
+# Install
+```
+npm install
+```
+Or simple:
+```
+yarn
+```
+
+## Configuring
+The application uses just one database: [Postgres](https://www.postgresql.org).
+
+### Postgres
+For the fastest setup it is recommended to use [docker-compose](https://docs.docker.com/compose), you just need to run:
+```bash
+docker-compose up -d pg
+```
+Or if you prefer to create the container manually:
+```bash
+docker run --name pg -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+```
+
+### Migrations
+Remember to run the database migrations:
+```bash
+npx prisma migrate dev
+```
+> See more information on [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate).
+
