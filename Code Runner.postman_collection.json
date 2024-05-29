@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "f9ea2dd6-6f5c-4144-9885-6c5ddd3c6a8d",
+		"name": "Code Runner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19527899"
+	},
+	"item": [
+		{
+			"name": "List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"if (response.data?.length > 0) {\r",
+							"    const [challenge] = response.data;\r",
+							"    pm.collectionVariables.set('challengeId', challenge.id)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/challenges?limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"challenges"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "cursorId",
+							"value": "11bafe48-66c8-4726-8d73-460c981c198e",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"if (response.data?.length > 0) {\r",
+							"    const [challenge] = response.data;\r",
+							"    pm.collectionVariables.set('challengeId', challenge.id)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/challenges/{{challengeId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"challenges",
+						"{{challengeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Solution",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"language\": \"JS\",\r\n    \"code\": \"async function run({ input }) {\\n  return input * input;\\n}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/challenges/{{challengeId}}/solution",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"challenges",
+						"{{challengeId}}",
+						"solution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Power\",\r\n    \"description\": \"Calc numbers power\",\r\n    \"instructions\": \"Give a number calc its power\",\r\n    \"inputs\": [\r\n        {\r\n            \"id\": \"clwm7ealm000008ky9raxasvv\",\r\n            \"value\": {\r\n                \"input\": 5\r\n            },\r\n            \"expected\": 25\r\n        },\r\n        {\r\n            \"id\": \"clwm7eoyf000108ky2gmpa65o\",\r\n            \"value\": {\r\n                \"input\": 9\r\n            },\r\n            \"expected\": 81\r\n        },\r\n        {\r\n            \"id\": \"clwm7ewh1000208ky1hli9yrb\",\r\n            \"value\": {\r\n                \"input\": 11\r\n            },\r\n            \"expected\": 121\r\n        },\r\n        {\r\n            \"id\": \"clwm7f482000308kyg437fhmq\",\r\n            \"value\": {\r\n                \"input\": 33\r\n            },\r\n            \"expected\": 1089\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/challenges",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"challenges"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "challengeId",
+			"value": ""
+		}
+	]
+}
