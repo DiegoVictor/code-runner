@@ -65,3 +65,16 @@ In this file you may configure the database URL, app's port, code-runner contain
 |CODERUNNER_CONTAINER_URL|code-runner container URL. All you'll need to update if you change `docker-compose.yml` is the URL's port.|`http://localhost:9000/2015-03-31/functions/function/invocations`
 |CODERUNNER_FUNCTION|code-runner function name, it needs to match with the name on `template.yml`|`CodeRunnerFunction`
 
+
+# Running the tests
+[Jest](https://jestjs.io/) was the choice to test the app, to run:
+```
+$ yarn test
+```
+Or:
+```
+$ npm run test
+```
+
+## Coverage report
+You can see the coverage report inside `tests/coverage`. They are automatically created after the tests run.
