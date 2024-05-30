@@ -10,6 +10,24 @@ How would you run user's code in a safe way? This application is my answer, code
 
 ![Infrastructure Diagram](https://raw.githubusercontent.com/DiegoVictor/code-runner/main/code-runner.drawio.png)
 
+## Table of Contents
+* [Requirements](#requirements)
+* [Install](#install)
+  * [Configuring](#configuring)
+    * [Postgres](#postgres)
+    * [Migrations](#migrations)
+    * [Code Runner Container](#code-runner-container)
+    * [`.env`](#env)
+* [Usage](#usage)
+  * [Routes](#routes)
+    * [Requests](#requests)
+* [Deploy](#deploy)
+  * [`ops.yml`](#opsyml)
+  * [`infrastructure.yml`](#infrastructureyml)
+  * [Push Image to ECR Repository](#push-image-to-ecr-repository)
+  * [`template.yml`](#templateyml)
+* [Running the tests](#running-the-tests)
+  * [Coverage report](#coverage-report)
 
 # Requirements
 * Node.js ^20.9.0
@@ -120,6 +138,65 @@ Request body:
 }
 ```
 
+# Deploy
+Deploy the application in the following order:
+
+  1. [`ops.yml`](#opsyml) (Optional)
+  2. [`infrastructure.yml`](#infrastructureyml)
+  3. [Push Image to ECR Repository](#push-image-to-ecr-repository)
+  4. [`template.yml`](#templateyml)
+
+### `ops.yml`
+Only deployable manually, this is responsible for create permissions needed by github actions, that is, you don't need to deploy this stack if you are not using the pipeline.
+```shell
+sam deploy --stack-name coderunner-ops \
+  --template ops.yml \
+  --no-fail-on-empty-changeset
+```
+
+### `infrastructure.yml`
+   (Required) - Responsible for create an ECR Repository and RDS Database Instance and its credentials.
+  ```shell
+  sam deploy --stack-name coderunner-infrastructure \
+    --template infrastructure.yml \
+    --no-fail-on-empty-changeset
+  ```
+
+### Push Image to ECR Repository
+Push container image to ECR Repository created in the previous step:
+  1. Log in into ECR:
+  ```bash
+  aws ecr get-login-password --region <AWS_REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
+  ```
+
+  2. Build the image:
+  ```bash
+  cd container
+  docker build --platform linux/amd64 -t coderunner:1.0.0 .
+  ```
+
+  3. Tag
+  ```bash
+  docker tag coderunner:1.0.0 <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/coderunner:1.0.0
+  ```
+
+  4. And push to ECR Repository
+  ```bash
+  docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/coderunner:1.0.0
+  ```
+
+### `template.yml`
+Deploy application:
+```bash
+sam deploy --stack-name coderunner-dev \
+  --no-fail-on-empty-changeset \
+  --image-repositories CodeRunnerFunction=<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/coderunner \
+  --capabilities CAPABILITY_IAM \
+  --role-arn <CLOUDFORMATION_ROLE_ARN> \
+  --parameter-overrides \
+  ImageUri=<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/coderunner:1.0.0
+```
+> You can get `CLOUDFORMATION_ROLE_ARN` from `ops.yml` if you deployed it, otherwise you will need to create it manually.
 
 # Running the tests
 [Jest](https://jestjs.io/) was the choice to test the app, to run:
