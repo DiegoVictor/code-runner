@@ -65,6 +65,61 @@ In this file you may configure the database URL, app's port, code-runner contain
 |CODERUNNER_CONTAINER_URL|code-runner container URL. All you'll need to update if you change `docker-compose.yml` is the URL's port.|`http://localhost:9000/2015-03-31/functions/function/invocations`
 |CODERUNNER_FUNCTION|code-runner function name, it needs to match with the name on `template.yml`|`CodeRunnerFunction`
 
+# Usage
+First of all start up the server:
+```
+npm run dev:server
+```
+Or:
+```
+yarn dev:server
+```
+> Make sure to have the [`Code Runner Container`](#code-runner-container) and [Postgres](#postgres) running, otherwise you will not be able to execute users' code
+
+## Routes
+|route|HTTP Method|params|description
+|:---|:---:|:---:|:---:
+|`/challenges`|GET| - |Return challenges paginated.
+|`/challenges/:id`|GET|`id` of a challenge.|Return challenge's details.
+|`/challenges`|POST|Body with challenge `title`, `description`, `instructions` and `inputs`.|Create a new challenge.
+|`/challenges/:id/solution`|POST|`id` of a challenge. Body with users' code and language used to solve the problem.|Execute users' code, it uses the results to compare with the expected values provided for the challenge.
+
+### Requests
+* `POST /challenges`
+
+Request body:
+```json
+{
+  "title": "Squares",
+  "description": "Calculate numbers square",
+  "instructions": "For each provided number calculate its square",
+  "inputs": [
+    {
+      "value": 5,
+      "expected": 25
+    },
+    {
+      "value": 12,
+      "expected": 144
+     },
+    {
+      "value": 25,
+      "expected": 625
+    }
+  ]
+}
+```
+
+* `POST /challenges/:id/solution`
+
+Request body:
+```json
+{
+  "code": "async function run(value){return value * value;}",
+  "language": "js",
+}
+```
+
 
 # Running the tests
 [Jest](https://jestjs.io/) was the choice to test the app, to run:
