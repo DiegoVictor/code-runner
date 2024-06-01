@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y curl && \
 # Final image
 FROM node:20-buster-slim
 ENV NPM_CONFIG_CACHE=/tmp/.npm
+ENV NODE_DISABLE_COLORS=1
 ARG FUNCTION_DIR
 
 COPY --from=go-build /usr/local/go /usr/local/go
