@@ -9,6 +9,8 @@ on:
         required: true
       AWS_ACCOUNT_ID:
         required: true
+      CODECOV_TOKEN:
+        required: true
 
 env:
   AWS_REGISTRY_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
