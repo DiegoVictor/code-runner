@@ -1,5 +1,6 @@
 import json
 import sys
+from io import StringIO
 
 # @code-here
 
@@ -11,7 +12,14 @@ def executor(input):
   }
 
   try:
+    original_stdout = sys.stdout
+    sys.stdout = StringIO()
+
     output = run(value)
+
+    response['stdout'] = sys.stdout.getvalue().replace("\n", "\\n")
+
+    sys.stdout = original_stdout
 
     response['output'] = output
   except Exception as err:
