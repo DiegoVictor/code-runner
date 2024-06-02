@@ -16,7 +16,7 @@ const main = async ({ code, inputs }) => {
 
   const result = await command("python", [filename, JSON.stringify(inputs)]);
 
-  return JSON.parse(result.replace(/\\n/, ""));
+  return JSON.parse(result.replace(/\n/gi, ""));
 };
 
 module.exports.main = main;

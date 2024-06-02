@@ -16,7 +16,7 @@ const main = async ({ code, inputs }) => {
 
   const result = await command("go", ["run", filename, JSON.stringify(inputs)]);
 
-  return JSON.parse(result.replace(/\\n/, ""));
+  return JSON.parse(result.replace(/\n/, ""));
 };
 
 module.exports.main = main;
