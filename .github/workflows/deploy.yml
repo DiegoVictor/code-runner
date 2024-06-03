@@ -9,6 +9,7 @@ on:
       - 'src/**'
       - 'container/**'
       - 'template.yml'
+      - 'package.json'
   workflow_dispatch:
 
 env:
