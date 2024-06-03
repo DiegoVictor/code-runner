@@ -19,7 +19,25 @@ env:
   CLOUDFORMATION_ROLE_ARN: arn:aws:iam::254837279431:role/coderunner-cloudformation-role
 
 jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          npm ci
+          npm run test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./tests/coverage/
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   push-container:
+    needs: [unit-test]
     uses: ./.github/workflows/push-container.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
