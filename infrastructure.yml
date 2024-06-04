@@ -27,7 +27,7 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  DbClusterCredentials:
+  DbCredentials:
     Type: AWS::SecretsManager::Secret
     Properties:
       GenerateSecretString:
@@ -36,26 +36,26 @@ Resources:
         PasswordLength: 30
         ExcludeCharacters: '"@/\'
 
-  CodeRunnerRdsDbCluster:
+  DbCluster:
     Type: AWS::RDS::DBCluster
     Properties:
       DatabaseName: coderunner
       DBClusterIdentifier: coderunner-dbcluster
       Engine: aurora-postgresql
       EngineMode: provisioned
-      MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
-      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
+      MasterUsername: !Sub '{{resolve:secretsmanager:${DbCredentials}::username}}'
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbCredentials}::password}}'
       Port: 5432
 
-  CodeRunnerRdsDbInstance:
+  DbInstance:
     Type: AWS::RDS::DBInstance
     Properties:
-      DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
+      DBClusterIdentifier: !Ref DbCluster
       DBInstanceClass: db.t3.medium
       Engine: aurora-postgresql
 
 Outputs:
   DbClusterCredentialsArn:
-    Value: !Ref DbClusterCredentials
+    Value: !Ref DbCredentials
     Export:
-      Name: coderunner-DbClusterCredentialsArn
+      Name: coderunner-DbCredentialsArn
