@@ -14,6 +14,16 @@ Resources:
       MemorySize: 512
       Timeout: 30
 
+  MigrationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      MemorySize: 256
+      Runtime: nodejs20.x
+      Timeout: 60
+      InlineCode:
+        const output = execSync("npx prisma migrate deploy");
+        console.log(output.toString());
+
   ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -21,6 +31,11 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 30
+      AutoPublishAlias: live
+      DeploymentPreference:
+        Type: AllAtOnce
+        Hooks:
+          PreTraffic: !Ref MigrationFunction
       Environment:
         Variables:
           CODE_RUNNER_FUNCTION_NAME: !Ref CodeRunnerFunction
