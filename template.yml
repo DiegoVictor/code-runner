@@ -33,7 +33,7 @@ Resources:
       DeploymentPreference:
         Type: AllAtOnce
         Hooks:
-          PreTraffic: !Ref MigrationFunction
+          PreTraffic: !Ref MigrationsFunction
       Environment:
         Variables:
           CODE_RUNNER_FUNCTION_NAME: !Ref CodeRunnerFunction
