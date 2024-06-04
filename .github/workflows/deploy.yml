@@ -72,7 +72,6 @@ jobs:
         run: |
           sam deploy --stack-name coderunner-dev \
             --no-fail-on-empty-changeset \
-            --resolve-s3 \
             --image-repositories CodeRunnerFunction=$REPOSITORY_URI \
             --capabilities CAPABILITY_IAM \
             --role-arn ${CLOUDFORMATION_ROLE_ARN} \
