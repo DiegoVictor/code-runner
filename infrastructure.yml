@@ -41,10 +41,8 @@ Resources:
     Properties:
       DatabaseName: coderunner
       DBClusterIdentifier: coderunner-dbcluster
-      EnableHttpEndpoint: true
       Engine: aurora-postgresql
       EngineMode: provisioned
-      EngineVersion: 16.1
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbClusterCredentials}::password}}'
       Port: 5432
