@@ -14,14 +14,6 @@ Resources:
       MemorySize: 512
       Timeout: 30
 
-  MigrationsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/migrations.handler
-      MemorySize: 256
-      Runtime: nodejs20.x
-      Timeout: 60
-
   ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -29,11 +21,6 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 30
-      AutoPublishAlias: live
-      DeploymentPreference:
-        Type: AllAtOnce
-        Hooks:
-          PreTraffic: !Ref MigrationFunction
       Environment:
         Variables:
           CODE_RUNNER_FUNCTION_NAME: !Ref CodeRunnerFunction
