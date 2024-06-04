@@ -21,11 +21,11 @@ Resources:
       Runtime: nodejs20.x
       Timeout: 60
       Handler: index.handler
-      InlineCode:
+      InlineCode: |
         module.exports.handler = (event) => {
           const output = execSync("npx prisma migrate deploy");
           console.log(output.toString());
-        }
+        };
 
   ApiFunction:
     Type: AWS::Serverless::Function
