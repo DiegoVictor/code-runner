@@ -51,7 +51,7 @@ Resources:
     Type: AWS::RDS::DBInstance
     Properties:
       DBClusterIdentifier: !Ref CodeRunnerRdsDbCluster
-      DBInstanceClass: db.r5.large
+      DBInstanceClass: db.t3.medium
       Engine: aurora-postgresql
 
 Outputs:
