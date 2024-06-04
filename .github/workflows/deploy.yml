@@ -18,6 +18,7 @@ env:
   AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
   REPOSITORY_NAME: coderunner
   CLOUDFORMATION_ROLE_ARN: arn:aws:iam::254837279431:role/coderunner-cloudformation-role
+  CODEBASE_S3BUCKET: coderunner-codebase
 
 jobs:
   unit-test:
@@ -72,6 +73,7 @@ jobs:
         run: |
           sam deploy --stack-name coderunner-dev \
             --no-fail-on-empty-changeset \
+            --s3-bucket ${{ env.CODEBASE_S3BUCKET }} \
             --image-repositories CodeRunnerFunction=$REPOSITORY_URI \
             --capabilities CAPABILITY_IAM \
             --role-arn ${CLOUDFORMATION_ROLE_ARN} \
