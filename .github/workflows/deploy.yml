@@ -69,6 +69,11 @@ jobs:
           REPOSITORY_URI=$AWS_REGISTRY_URI/$REPOSITORY_NAME
           echo "REPOSITORY_URI=$REPOSITORY_URI" >> "$GITHUB_ENV"
 
+      - name: Build Package
+        run: |
+          npm i
+          sam build
+
       - name: Deploy template.yml
         run: |
           sam deploy --stack-name coderunner-dev \
