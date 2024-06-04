@@ -27,6 +27,11 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: coderunner-codebase
+
   DbCredentials:
     Type: AWS::SecretsManager::Secret
     Properties:
