@@ -4,11 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev:server": "nodemon --exec \"node --env-file=.env src/index.js\"",
-    "dev:seed": "prisma db seed",
     "test": "jest"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@aws-sdk/client-lambda": "^3.569.0",
