@@ -94,6 +94,8 @@ Resources:
               - 'secretsmanager:UpdateSecret'
               - 's3:CreateBucket'
               - 's3:DeleteBucket'
+              - 's3:GetObject'
+              - 's3:PutObject'
             Resource: '*'
       Roles:
         - !Ref PipelineRole
