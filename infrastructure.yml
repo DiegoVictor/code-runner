@@ -64,3 +64,11 @@ Outputs:
     Value: !Ref DbCredentials
     Export:
       Name: coderunner-DbCredentialsArn
+  DbClusterAddress:
+    Value: !GetAtt DbCluster.Endpoint.Address
+    Export:
+      Name: coderunner-DbClusterAddress
+  DbClusterPort:
+    Value: !GetAtt DbCluster.Endpoint.Port
+    Export:
+      Name: coderunner-DbClusterPort
