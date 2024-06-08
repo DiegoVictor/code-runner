@@ -5,6 +5,13 @@ Parameters:
     Type: String
     Description: ECR Repository URI
 
+Metadata:
+  BuildProperties:
+    Loader:
+      - .prisma=file
+      - .so.node=file
+    AssetNames: '[name]'
+
 Resources:
   CodeRunnerFunction:
     Type: AWS::Serverless::Function
@@ -21,6 +28,9 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 60
+      Environment:
+        Variables:
+          PRISMA_CLI_BINARY_TARGETS: native,rhel-openssl-3.0.x
 
   ApiFunction:
     Type: AWS::Serverless::Function
