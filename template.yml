@@ -46,7 +46,8 @@ Resources:
           PreTraffic: !Ref MigrationsFunction
       Environment:
         Variables:
-          CODE_RUNNER_FUNCTION_NAME: !Ref CodeRunnerFunction
+          NODE_ENV: production
+          CODERUNNER_FUNCTION: !Ref CodeRunnerFunction
       Events:
         Proxy:
           Type: Api
