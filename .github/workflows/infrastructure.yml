@@ -6,13 +6,13 @@ on:
     paths:
       - 'infrastructure.yml'
       - '.github/workflows/infrastructure.yml'
-      - '.github/workflows/upsert-infrastructure.yml'
+      - '.github/workflows/deploy-infrastructure.yml'
   workflow_dispatch:
 
 
 jobs:
   deploy-infrastructure:
-    uses: ./.github/workflows/upsert-infrastructure.yml
+    uses: ./.github/workflows/deploy-infrastructure.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
