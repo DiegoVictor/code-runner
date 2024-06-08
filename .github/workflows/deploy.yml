@@ -52,6 +52,8 @@ jobs:
     container:
       image: public.ecr.aws/lambda/nodejs:20
     steps:
+      - run: yum update -y && yum install -y tar
+
       - uses: actions/checkout@v4
 
       - uses: aws-actions/setup-sam@v2
