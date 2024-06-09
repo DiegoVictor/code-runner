@@ -69,10 +69,18 @@ jobs:
           REPOSITORY_URI=$AWS_REGISTRY_URI/$REPOSITORY_NAME
           echo "REPOSITORY_URI=$REPOSITORY_URI" >> "$GITHUB_ENV"
 
-      - name: Build Package
+      - name: Install dependencies
         run: |
-          npm i
-          sam build
+          rm package-lock.json
+          docker run \
+            -v $(pwd):/var/task \
+            -w /var/task \
+            --entrypoint /bin/bash \
+            amazon/aws-lambda-nodejs:20 \
+            -c "npm i --production"
+
+      - name: Build Package
+        run: sam build
 
       - name: Deploy template.yml
         run: |
