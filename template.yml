@@ -28,6 +28,9 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 60
+      VpcConfig:
+        SecurityGroupIds: !Split [ ',', !ImportValue coderunner-SecurityGroupIds ]
+        SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetIds ]
       Environment:
         Variables:
           PRISMA_CLI_BINARY_TARGETS: native,rhel-openssl-3.0.x
