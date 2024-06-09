@@ -77,8 +77,7 @@ jobs:
             -w /var/task \
             --entrypoint /bin/bash \
             amazon/aws-lambda-nodejs:20 \
-            -c "npm i --production"
-          chmod -R a+x node_modules
+            -c "npm i --production && chmod -R a+x node_modules"
 
       - name: Build Package
         run: sam build
