@@ -72,3 +72,21 @@ Outputs:
     Value: !GetAtt DbCluster.Endpoint.Port
     Export:
       Name: coderunner-DbClusterPort
+  SecurityGroupIds:
+    Value: !Join [ ',', [ 'sg-0d3f580f6d836a401' ] ]
+    Export:
+      Name: coderunner-SecurityGroupIds
+  SubnetIds:
+    Value: !Join [
+      ',',
+      [
+        'subnet-04701fef257ae0c0a',
+        'subnet-0cb1872219b2a9c19',
+        'subnet-0d8b2b5b2e86eeaae',
+        'subnet-067caf19899ca509d',
+        'subnet-0664cdd67109a01ad',
+        'subnet-06d34fb45ec9b8665'
+      ]
+    ]
+    Export:
+      Name: coderunner-SubnetIds
