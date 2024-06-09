@@ -49,11 +49,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [push-container]
-    container:
-      image: public.ecr.aws/lambda/nodejs:20
     steps:
-      - run: microdfn update -y && microdfn install -y tar
-
       - uses: actions/checkout@v4
 
       - uses: aws-actions/setup-sam@v2
