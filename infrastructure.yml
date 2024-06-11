@@ -72,6 +72,10 @@ Outputs:
     Value: !GetAtt DbCluster.Endpoint.Port
     Export:
       Name: coderunner-DbClusterPort
+  S3BucketName:
+    Value: !Ref S3Bucket
+    Export:
+      Name: coderunner-S3BucketName
   SecurityGroupIds:
     Value: !Join [ ',', [ 'sg-0d3f580f6d836a401' ] ]
     Export:
