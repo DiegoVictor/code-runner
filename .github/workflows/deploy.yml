@@ -77,10 +77,12 @@ jobs:
             -w /var/task \
             --entrypoint /bin/bash \
             amazon/aws-lambda-nodejs:20 \
-            -c "npm i --production && chown -R root:root node_modules"
+            -c "npm i --production"
 
-      - name: Build Package
-        run: sam build
+      - name: Build and Upload Package
+        run: |
+          zip --symlinks -r coderunner-latest.zip ./*
+          aws s3 cp coderunner-latest.zip s3://${{ env.CODEBASE_S3BUCKET }}/coderunner-latest.zip
 
       - name: Deploy template.yml
         run: |
