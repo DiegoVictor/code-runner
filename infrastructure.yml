@@ -27,7 +27,7 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  S3Bucket:
+  CodeBaseBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: coderunner-codebase
@@ -60,22 +60,22 @@ Resources:
       Engine: aurora-postgresql
 
 Outputs:
-  DbClusterCredentialsArn:
+  DbCredentials:
     Value: !Ref DbCredentials
     Export:
-      Name: coderunner-DbCredentialsArn
-  DbClusterAddress:
-    Value: !GetAtt DbCluster.Endpoint.Address
+      Name: coderunner-DbCredentials
+  DbHost:
+    Value: DbCluster.Endpoint.Address,
     Export:
-      Name: coderunner-DbClusterAddress
-  DbClusterPort:
+      Name: coderunner-DbHost
+  DbPort:
     Value: !GetAtt DbCluster.Endpoint.Port
     Export:
-      Name: coderunner-DbClusterPort
-  S3BucketName:
-    Value: !Ref S3Bucket
+      Name: coderunner-DbPort
+  CodeBaseBucketName:
+    Value: !Ref CodeBaseBucket
     Export:
-      Name: coderunner-S3BucketName
+      Name: coderunner-CodeBaseBucketName
   SecurityGroupIds:
     Value: !Join [ ',', [ 'sg-0d3f580f6d836a401' ] ]
     Export:
