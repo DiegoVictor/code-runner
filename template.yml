@@ -28,7 +28,7 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 60
-      CodeUri: !Join [ '', [ 's3://', !ImportValue coderunner-S3BucketName, '/coderunner-latest.zip' ] ]
+      CodeUri: s3://coderunner-codebase/coderunner-latest.zip
       VpcConfig:
         SecurityGroupIds: !Split [ ',', !ImportValue coderunner-SecurityGroupIds ]
         SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetIds ]
