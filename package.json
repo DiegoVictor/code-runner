@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-lambda": "^3.569.0",
+    "@aws-sdk/client-secrets-manager": "^3.592.0",
     "@prisma/client": "^5.13.0",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
