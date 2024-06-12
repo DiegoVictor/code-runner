@@ -29,7 +29,7 @@ Resources:
       Runtime: nodejs20.x
       Timeout: 60
       CodeUri:
-        Bucket: coderunner-codebase
+        Bucket: !ImportValue coderunner-CodeBaseBucketName
         Key: coderunner-latest.zip
       VpcConfig:
         SecurityGroupIds: !Split [ ',', !ImportValue coderunner-SecurityGroupIds ]
@@ -55,7 +55,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
-          CODERUNNER_FUNCTION: !Ref
+          CODERUNNER_FUNCTION: !Ref CodeRunnerFunction
           DB_HOST: !Join [ ':', [ !ImportValue coderunner-DbHost, !ImportValue coderunner-DbPort ] ]
           DB_SECRET: !ImportValue coderunner-DbCredentials
       Events:
