@@ -65,7 +65,7 @@ Outputs:
     Export:
       Name: coderunner-DbCredentials
   DbHost:
-    Value: DbCluster.Endpoint.Address,
+    Value: DbCluster.Endpoint.Address
     Export:
       Name: coderunner-DbHost
   DbPort:
