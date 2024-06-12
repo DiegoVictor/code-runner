@@ -36,8 +36,9 @@ Resources:
         SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetIds ]
       Environment:
         Variables:
-          PRISMA_CLI_BINARY_TARGETS: native,rhel-openssl-3.0.x
-          DB_SECRET: !ImportValue coderunner-DbCredentialsArn
+          PRISMA_CLI_BINARY_TARGETS: rhel-openssl-3.0.x
+          DB_HOST: !Join [ ':', [ !ImportValue coderunner-DbHost, !ImportValue coderunner-DbPort ] ]
+          DB_SECRET: !ImportValue coderunner-DbCredentials
 
   ApiFunction:
     Type: AWS::Serverless::Function
@@ -54,7 +55,9 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
-          CODERUNNER_FUNCTION: !Ref CodeRunnerFunction
+          CODERUNNER_FUNCTION: !Ref
+          DB_HOST: !Join [ ':', [ !ImportValue coderunner-DbHost, !ImportValue coderunner-DbPort ] ]
+          DB_SECRET: !ImportValue coderunner-DbCredentials
       Events:
         Proxy:
           Type: Api
