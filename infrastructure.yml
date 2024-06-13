@@ -61,21 +61,25 @@ Resources:
       DBSecurityGroups:
         - !Ref RDSSecurityGroup
 
-  RDSSecurityGroup:
+  RdsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: rds-lambda-1
       GroupDescription: Allow traffic from Lambda to RDS
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 5432
-          ToPort: 5432
-          SourceSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: -1
           ToPort: -1
           CidrIp: 0.0.0.0/0
+
+  RdsSecurityGroupIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !GetAtt RDSSecurityGroup.GroupId
+      IpProtocol: tcp
+      FromPort: 5432
+      ToPort: 5432
+      SourceSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
 
   LambdaSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -87,7 +91,7 @@ Resources:
         - IpProtocol: -1
           FromPort: -1
           ToPort: -1
-          CidrIp: 0.0.0.0/0
+          DestinationSecurityGroupId: !GetAtt RDSSecurityGroup.GroupId
 
 Outputs:
   DbCredentials:
