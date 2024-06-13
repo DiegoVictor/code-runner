@@ -86,7 +86,7 @@ Resources:
         - IpProtocol: -1
           FromPort: -1
           ToPort: -1
-          DestinationSecurityGroupId: !GetAtt RDSSecurityGroup.GroupId
+          CidrIp: 0.0.0.0/0
 
 Outputs:
   DbCredentials:
