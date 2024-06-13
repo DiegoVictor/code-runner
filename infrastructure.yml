@@ -59,7 +59,7 @@ Resources:
       DBInstanceClass: db.t3.medium
       Engine: aurora-postgresql
       DBSecurityGroups:
-        - !Ref RDSSecurityGroup
+        - !Ref RdsSecurityGroup
 
   RdsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -75,7 +75,7 @@ Resources:
   RdsSecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
-      GroupId: !GetAtt RDSSecurityGroup.GroupId
+      GroupId: !GetAtt RdsSecurityGroup.GroupId
       IpProtocol: tcp
       FromPort: 5432
       ToPort: 5432
@@ -91,7 +91,7 @@ Resources:
         - IpProtocol: -1
           FromPort: -1
           ToPort: -1
-          DestinationSecurityGroupId: !GetAtt RDSSecurityGroup.GroupId
+          DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
 
 Outputs:
   DbCredentials:
