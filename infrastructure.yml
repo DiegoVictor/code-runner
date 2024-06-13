@@ -58,6 +58,35 @@ Resources:
       DBClusterIdentifier: !Ref DbCluster
       DBInstanceClass: db.t3.medium
       Engine: aurora-postgresql
+      DBSecurityGroups:
+        - !Ref RDSSecurityGroup
+
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: rds-lambda-1
+      GroupDescription: Allow traffic from Lambda to RDS
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+
+  LambdaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: lambda-rds-1
+      GroupDescription: Allow traffic from Lambda to RDS
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          DestinationSecurityGroupId: !GetAtt RDSSecurityGroup.GroupId
 
 Outputs:
   DbCredentials:
