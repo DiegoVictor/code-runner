@@ -82,6 +82,7 @@ Resources:
     Properties:
       GroupName: lambda-rds-1
       GroupDescription: Allow traffic from Lambda to RDS
+      VpcId: vpc-0dcf985f88fdc7e18
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: -1
@@ -105,10 +106,10 @@ Outputs:
     Value: !Ref CodeBaseBucket
     Export:
       Name: coderunner-CodeBaseBucketName
-  SecurityGroupIds:
-    Value: !Join [ ',', [ 'sg-0d3f580f6d836a401' ] ]
+  LambdaSecurityGroupId:
+    Value: !GetAtt LambdaSecurityGroup.GroupId
     Export:
-      Name: coderunner-SecurityGroupIds
+      Name: coderunner-LambdaSecurityGroupId
   SubnetIds:
     Value: !Join [
       ',',
