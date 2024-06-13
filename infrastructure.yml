@@ -66,6 +66,7 @@ Resources:
     Properties:
       GroupName: rds-lambda-1
       GroupDescription: Allow traffic from Lambda to RDS
+      VpcId: vpc-0dcf985f88fdc7e18
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: -1
