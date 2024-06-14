@@ -1,5 +1,6 @@
 const { SecretsManager } = require("@aws-sdk/client-secrets-manager");
-const { command } = require("./common/command");
+// const { command } = require("./common/command");
+const { execSync } = require("child_process");
 
 module.exports.handler = async () => {
   // const secretsManager = new SecretsManager({});
@@ -10,8 +11,6 @@ module.exports.handler = async () => {
 
   // const DATABASE_URL = `postgresql://${username}:${password}@${process.env.DB_HOST}/coderunner?schema=public`;
 
-  const output = await command(
-    `DATABASE_URL="${process.env.DATABASE_URL}" && ./node_modules/.bin/prisma migrate deploy`
-  );
-  console.log(output);
+  const output = execSync("./node_modules/.bin/prisma migrate deploy");
+  console.log(output.toString());
 };
