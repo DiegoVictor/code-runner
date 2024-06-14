@@ -11,7 +11,7 @@ module.exports.handler = async () => {
   // const DATABASE_URL = `postgresql://${username}:${password}@${process.env.DB_HOST}/coderunner?schema=public`;
 
   const output = await command(
-    `DATABASE_URL=${process.env.DATABASE_URL} npx prisma migrate deploy`
+    `DATABASE_URL="${process.env.DATABASE_URL}" && ./node_modules/.bin/prisma migrate deploy`
   );
   console.log(output);
 };
