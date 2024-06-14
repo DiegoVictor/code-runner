@@ -32,7 +32,8 @@ Resources:
         Bucket: !ImportValue coderunner-CodeBaseBucketName
         Key: coderunner-latest.zip
       VpcConfig:
-        SecurityGroupIds: !Split [ ',', !ImportValue coderunner-SecurityGroupIds ]
+        SecurityGroupIds:
+          - !ImportValue coderunner-LambdaSecurityGroupId
         SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetIds ]
       Environment:
         Variables:
