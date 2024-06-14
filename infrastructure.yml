@@ -51,6 +51,8 @@ Resources:
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbCredentials}::password}}'
       Port: 5432
+      VpcSecurityGroupIds:
+        - !GetAtt RdsSecurityGroup.GroupId
 
   DbInstance:
     Type: AWS::RDS::DBInstance
@@ -58,8 +60,6 @@ Resources:
       DBClusterIdentifier: !Ref DbCluster
       DBInstanceClass: db.t3.medium
       Engine: aurora-postgresql
-      DBSecurityGroups:
-        - !Ref RdsSecurityGroup
 
   RdsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
