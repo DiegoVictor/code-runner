@@ -51,6 +51,7 @@ Resources:
       MasterUsername: !Sub '{{resolve:secretsmanager:${DbCredentials}::username}}'
       MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbCredentials}::password}}'
       Port: 5432
+      # PubliclyAccessible: true
       VpcSecurityGroupIds:
         - !GetAtt RdsSecurityGroup.GroupId
 
@@ -67,6 +68,11 @@ Resources:
       GroupName: rds-lambda-1
       GroupDescription: Allow traffic from Lambda to RDS
       VpcId: vpc-0dcf985f88fdc7e18
+      # SecurityGroupIngress:
+      #   - IpProtocol: tcp
+      #     FromPort: 5432
+      #     ToPort: 5432
+      #     CidrIp: Your IP Address
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: -1
