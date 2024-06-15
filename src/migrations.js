@@ -17,7 +17,7 @@ module.exports.handler = async () => {
       shell: true,
       env: {
         ...process.env,
-        DATABASE_URL: `postgresql://app_user:${process.env.DATABASE_PASSWORD}@${process.env.DB_HOST}/coderunner`,
+        DATABASE_URL: process.env.DATABASE_URL,
       },
     }
   );
