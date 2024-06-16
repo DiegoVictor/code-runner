@@ -30,7 +30,7 @@ Resources:
   CodeRunnerBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: coderunner-codebase
+      BucketName: coderunner
 
   ClusterCredentials:
     Type: AWS::SecretsManager::Secret

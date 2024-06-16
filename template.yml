@@ -30,7 +30,7 @@ Resources:
       Timeout: 60
       CodeUri:
         Bucket: !ImportValue coderunner-CodeRunnerBucketName
-        Key: coderunner/latest.zip
+        Key: package/latest.zip
       VpcConfig:
         SecurityGroupIds:
           - !ImportValue coderunner-LambdaSecurityGroupId
@@ -50,7 +50,7 @@ Resources:
       Timeout: 30
       CodeUri:
         Bucket: !ImportValue coderunner-CodeRunnerBucketName
-        Key: coderunner/latest.zip
+        Key: package/latest.zip
       AutoPublishAlias: live
       DeploymentPreference:
         Type: AllAtOnce
