@@ -100,6 +100,22 @@ Resources:
           ToPort: -1
           DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
 
+  SecretsManagerEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.secretsmanager'
+      VpcId: vpc-0dcf985f88fdc7e18
+      VpcEndpointType: Interface
+      SecurityGroupIds:
+        - !GetAtt LambdaSecurityGroup.GroupId
+      SubnetIds:
+        - subnet-04701fef257ae0c0a
+        - subnet-0cb1872219b2a9c19
+        - subnet-0d8b2b5b2e86eeaae
+        - subnet-067caf19899ca509d
+        - subnet-0664cdd67109a01ad
+        - subnet-06d34fb45ec9b8665
+
 Outputs:
   ClusterCredentials:
     Value: !Ref ClusterCredentials
