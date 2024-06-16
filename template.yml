@@ -29,17 +29,17 @@ Resources:
       Runtime: nodejs20.x
       Timeout: 60
       CodeUri:
-        Bucket: !ImportValue coderunner-CodeBaseBucketName
-        Key: coderunner-latest.zip
+        Bucket: !ImportValue coderunner-CodeRunnerBucketName
+        Key: coderunner/latest.zip
       VpcConfig:
         SecurityGroupIds:
           - !ImportValue coderunner-LambdaSecurityGroupId
-        SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetIds ]
+        SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetsId ]
       Environment:
         Variables:
           PRISMA_CLI_BINARY_TARGETS: rhel-openssl-3.0.x
-          DB_HOST: !Join [ ':', [ !ImportValue coderunner-DbHost, !ImportValue coderunner-DbPort ] ]
-          DB_SECRET: !ImportValue coderunner-DbCredentials
+          CLUSTER_URL: !ImportValue coderunner-ClusterUrl
+          CLUSTER_SECRET_ID: !ImportValue coderunner-ClusterCredentials
 
   ApiFunction:
     Type: AWS::Serverless::Function
@@ -48,6 +48,9 @@ Resources:
       MemorySize: 256
       Runtime: nodejs20.x
       Timeout: 30
+      CodeUri:
+        Bucket: !ImportValue coderunner-CodeRunnerBucketName
+        Key: coderunner/latest.zip
       AutoPublishAlias: live
       DeploymentPreference:
         Type: AllAtOnce
@@ -57,8 +60,8 @@ Resources:
         Variables:
           NODE_ENV: production
           CODERUNNER_FUNCTION: !Ref CodeRunnerFunction
-          DB_HOST: !Join [ ':', [ !ImportValue coderunner-DbHost, !ImportValue coderunner-DbPort ] ]
-          DB_SECRET: !ImportValue coderunner-DbCredentials
+          CLUSTER_URL: !ImportValue coderunner-ClusterUrl
+          CLUSTER_SECRET_ID: !ImportValue coderunner-ClusterCredentials
       Events:
         Proxy:
           Type: Api

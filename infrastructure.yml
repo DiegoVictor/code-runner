@@ -27,12 +27,12 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  CodeBaseBucket:
+  CodeRunnerBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: coderunner-codebase
 
-  DbCredentials:
+  ClusterCredentials:
     Type: AWS::SecretsManager::Secret
     Properties:
       GenerateSecretString:
@@ -48,8 +48,8 @@ Resources:
       DBClusterIdentifier: coderunner-dbcluster
       Engine: aurora-postgresql
       EngineMode: provisioned
-      MasterUsername: !Sub '{{resolve:secretsmanager:${DbCredentials}::username}}'
-      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbCredentials}::password}}'
+      MasterUsername: !Sub '{{resolve:secretsmanager:${ClusterCredentials}::username}}'
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${ClusterCredentials}::password}}'
       Port: 5432
       # PubliclyAccessible: true
       VpcSecurityGroupIds:
@@ -101,27 +101,23 @@ Resources:
           DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
 
 Outputs:
-  DbCredentials:
-    Value: !Ref DbCredentials
+  ClusterCredentials:
+    Value: !Ref ClusterCredentials
     Export:
-      Name: coderunner-DbCredentials
-  DbHost:
-    Value: !GetAtt DbCluster.Endpoint.Address
+      Name: coderunner-ClusterCredentials
+  ClusterUrl:
+    Value: !Join [ ':', [ !GetAtt DbCluster.Endpoint.Address, !GetAtt DbCluster.Endpoint.Port ] ]
     Export:
-      Name: coderunner-DbHost
-  DbPort:
-    Value: !GetAtt DbCluster.Endpoint.Port
+      Name: coderunner-ClusterUrl
+  CodeRunnerBucketName:
+    Value: !Ref CodeRunnerBucket
     Export:
-      Name: coderunner-DbPort
-  CodeBaseBucketName:
-    Value: !Ref CodeBaseBucket
-    Export:
-      Name: coderunner-CodeBaseBucketName
+      Name: coderunner-CodeRunnerBucketName
   LambdaSecurityGroupId:
     Value: !GetAtt LambdaSecurityGroup.GroupId
     Export:
       Name: coderunner-LambdaSecurityGroupId
-  SubnetIds:
+  SubnetsId:
     Value: !Join [
       ',',
       [
@@ -134,4 +130,4 @@ Outputs:
       ]
     ]
     Export:
-      Name: coderunner-SubnetIds
+      Name: coderunner-SubnetsId
