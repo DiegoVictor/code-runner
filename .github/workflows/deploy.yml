@@ -18,7 +18,7 @@ env:
   AWS_ROLE_TO_ASSUME: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/coderunner-pipeline-role
   REPOSITORY_NAME: coderunner
   CLOUDFORMATION_ROLE_ARN: arn:aws:iam::254837279431:role/coderunner-cloudformation-role
-  CODERUNNER_BUCKET: coderunner
+  CODERUNNER_BUCKET: coderunner-${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
   unit-test:
