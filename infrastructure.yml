@@ -112,7 +112,7 @@ Resources:
           ToPort: 443
           SourceSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
       SecurityGroupEgress:
-        - IpProtocol: 443
+        - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
           DestinationSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
