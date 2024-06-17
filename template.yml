@@ -35,6 +35,13 @@ Resources:
         SecurityGroupIds:
           - !ImportValue coderunner-LambdaSecurityGroupId
         SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetsId ]
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: '*'
       Environment:
         Variables:
           PRISMA_CLI_BINARY_TARGETS: rhel-openssl-3.0.x
