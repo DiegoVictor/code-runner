@@ -100,14 +100,32 @@ Resources:
           ToPort: -1
           DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
 
+  SecretsManagerEndpointSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: secretsmanager-lambda-1
+      GroupDescription: Allow traffic from Lambda to SecretsManager
+      VpcId: vpc-0dcf985f88fdc7e18
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          SourceSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
+      SecurityGroupEgress:
+        - IpProtocol: 443
+          FromPort: 443
+          ToPort: 443
+          DestinationSecurityGroupId: !GetAtt LambdaSecurityGroup.GroupId
+
   SecretsManagerEndpoint:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.secretsmanager'
       VpcId: vpc-0dcf985f88fdc7e18
+      PrivateDnsEnabled: true
       VpcEndpointType: Interface
       SecurityGroupIds:
-        - !GetAtt LambdaSecurityGroup.GroupId
+        - !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
       SubnetIds:
         - subnet-04701fef257ae0c0a
         - subnet-0cb1872219b2a9c19
