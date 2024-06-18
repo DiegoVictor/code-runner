@@ -20,7 +20,7 @@ module.exports.handler = async () => {
   );
 
   if (error) {
-    console.log(error.message, error.stack);
+    throw error;
   }
   console.log(output.toString());
 };
