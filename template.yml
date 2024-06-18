@@ -24,6 +24,7 @@ Resources:
   MigrationsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: MigrationsFunction
       Handler: src/migrations.handler
       MemorySize: 256
       Runtime: nodejs20.x
@@ -58,11 +59,6 @@ Resources:
       CodeUri:
         Bucket: !ImportValue coderunner-CodeRunnerBucketName
         Key: package/latest.zip
-      AutoPublishAlias: live
-      DeploymentPreference:
-        Type: AllAtOnce
-        Hooks:
-          PreTraffic: !Ref MigrationsFunction
       Environment:
         Variables:
           NODE_ENV: production
