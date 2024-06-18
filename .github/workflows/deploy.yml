@@ -82,8 +82,8 @@ jobs:
       - name: Build and Upload Package
         run: |
           zip --symlinks -r package.zip ./*
-          aws s3 cp package.zip s3://${{ env.CODERUNNER_BUCKET }}/package/latest.zip
           aws s3 cp package.zip s3://${{ env.CODERUNNER_BUCKET }}/package/${{ github.run_id }}.zip
+          aws s3 cp package.zip s3://${{ env.CODERUNNER_BUCKET }}/package/latest.zip
 
       - name: Deploy template.yml
         run: |
