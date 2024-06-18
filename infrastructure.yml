@@ -99,6 +99,10 @@ Resources:
           FromPort: -1
           ToPort: -1
           DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          DestinationSecurityGroupId: !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
 
   SecretsManagerEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
