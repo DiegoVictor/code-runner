@@ -10,13 +10,8 @@ module.exports.handler = async () => {
 
   const DATABASE_URL = `postgresql://${username}:${password}@${process.env.CLUSTER_URL}/coderunner?schema=public`;
   const { output, error } = spawnSync(
-    "./node_modules/.bin/prisma migrate deploy",
-    {
-      shell: true,
-      env: {
-        DATABASE_URL,
-      },
-    }
+    `DATABASE_URL="${DATABASE_URL}"./node_modules/.bin/prisma migrate deploy`,
+    { shell: true }
   );
 
   if (error) {
