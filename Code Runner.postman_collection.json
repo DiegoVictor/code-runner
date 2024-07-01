@@ -28,12 +28,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/challenges?limit=10",
-					"protocol": "http",
+					"raw": "{{host}}/challenges?limit=10",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"challenges"
 					],
@@ -95,7 +93,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"language\": \"JS\",\r\n    \"code\": \"async function run({ input }) {\\n  return input * input;\\n}\"\r\n}",
+					"raw": "{\r\n    \"language\": \"js\",\r\n    \"code\": \"async function run({ input }) {\\n  return input * input;\\n}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,7 +135,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Power\",\r\n    \"description\": \"Calc numbers power\",\r\n    \"instructions\": \"Give a number calc its power\",\r\n    \"inputs\": [\r\n        {\r\n            \"id\": \"clwm7ealm000008ky9raxasvv\",\r\n            \"value\": {\r\n                \"input\": 5\r\n            },\r\n            \"expected\": 25\r\n        },\r\n        {\r\n            \"id\": \"clwm7eoyf000108ky2gmpa65o\",\r\n            \"value\": {\r\n                \"input\": 9\r\n            },\r\n            \"expected\": 81\r\n        },\r\n        {\r\n            \"id\": \"clwm7ewh1000208ky1hli9yrb\",\r\n            \"value\": {\r\n                \"input\": 11\r\n            },\r\n            \"expected\": 121\r\n        },\r\n        {\r\n            \"id\": \"clwm7f482000308kyg437fhmq\",\r\n            \"value\": {\r\n                \"input\": 33\r\n            },\r\n            \"expected\": 1089\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Power\",\r\n    \"description\": \"Calc numbers power\",\r\n    \"instructions\": \"Give a number calc its power\",\r\n    \"languages\": [\r\n        \"js\",\r\n        \"ts\",\r\n        \"python\",\r\n        \"go\"\r\n    ],\r\n    \"inputs\": [\r\n        {\r\n            \"id\": \"clwm7ealm000008ky9raxasvv\",\r\n            \"value\": {\r\n                \"input\": 5\r\n            },\r\n            \"expected\": 25\r\n        },\r\n        {\r\n            \"id\": \"clwm7eoyf000108ky2gmpa65o\",\r\n            \"value\": {\r\n                \"input\": 9\r\n            },\r\n            \"expected\": 81\r\n        },\r\n        {\r\n            \"id\": \"clwm7ewh1000208ky1hli9yrb\",\r\n            \"value\": {\r\n                \"input\": 11\r\n            },\r\n            \"expected\": 121\r\n        },\r\n        {\r\n            \"id\": \"clwm7f482000308kyg437fhmq\",\r\n            \"value\": {\r\n                \"input\": 33\r\n            },\r\n            \"expected\": 1089\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,10 +157,37 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "challengeId",
-			"value": ""
+			"value": "e299941c-9d29-4521-b08a-407f542dd1c0"
+		},
+		{
+			"key": "host",
+			"value": "http://localhost:5000",
+			"type": "string"
 		}
 	]
 }
