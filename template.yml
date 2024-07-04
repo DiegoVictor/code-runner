@@ -57,7 +57,7 @@ Resources:
       Runtime: nodejs20.x
       Timeout: 30
       CodeUri:
-        Bucket: !ImportValue coderunner-CodeRunnerBucketName
+        Bucket: !ImportValue coderunner-BucketName
         Key: package/latest.zip
       Environment:
         Variables:
