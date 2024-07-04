@@ -27,7 +27,7 @@ Resources:
               - 'ecr:PutImage'
               - 'ecr:UploadLayerPart'
 
-  CodeRunnerBucket:
+  Bucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub 'coderunner-${AWS::AccountId}'
@@ -39,7 +39,7 @@ Resources:
         SecretStringTemplate: '{"username": "app_user"}'
         GenerateStringKey: password
         PasswordLength: 30
-        ExcludeCharacters: '"@/\:'
+        ExcludeCharacters: '"@/\:()'
 
   DbCluster:
     Type: AWS::RDS::DBCluster
@@ -152,10 +152,10 @@ Outputs:
     Value: !Join [ ':', [ !GetAtt DbCluster.Endpoint.Address, !GetAtt DbCluster.Endpoint.Port ] ]
     Export:
       Name: coderunner-ClusterUrl
-  CodeRunnerBucketName:
-    Value: !Ref CodeRunnerBucket
+  BucketName:
+    Value: !Ref Bucket
     Export:
-      Name: coderunner-CodeRunnerBucketName
+      Name: coderunner-BucketName
   LambdaSecurityGroupId:
     Value: !GetAtt LambdaSecurityGroup.GroupId
     Export:
