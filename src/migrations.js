@@ -11,7 +11,7 @@ module.exports.handler = async () => {
 
   const DATABASE_URL = getURL(username, password);
   const output = execSync(
-    `DATABASE_URL=${DATABASE_URL} ./node_modules/.bin/prisma migrate deploy`
+    `DATABASE_URL="${DATABASE_URL}" ./node_modules/.bin/prisma migrate deploy`
   );
 
   console.log(output.toString());
