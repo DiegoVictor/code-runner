@@ -144,23 +144,14 @@ Resources:
         - subnet-06d34fb45ec9b8665
 
 Outputs:
-  DatabaseUrl:
-    Value: !Join [
-      '',
-      [
-        'postgresql://',
-        !Sub '{{resolve:secretsmanager:${ClusterCredentials}::username}}',
-        ':',
-        !Sub '{{resolve:secretsmanager:${ClusterCredentials}::password}}',
-        '@',
-        !GetAtt DbCluster.Endpoint.Address,
-        ':',
-        !GetAtt DbCluster.Endpoint.Port,
-        '/coderunner?schema=public'
-      ]
-    ]
+  ClusterCredentials:
+    Value: !Ref ClusterCredentials
     Export:
-      Name: coderunner-DatabaseUrl
+      Name: coderunner-ClusterCredentials
+  ClusterUrl:
+    Value: !Join [ ':', [ !GetAtt DbCluster.Endpoint.Address, !GetAtt DbCluster.Endpoint.Port ] ]
+    Export:
+      Name: coderunner-ClusterUrl
   CodeRunnerBucketName:
     Value: !Ref CodeRunnerBucket
     Export:
