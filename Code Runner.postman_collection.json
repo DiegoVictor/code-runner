@@ -57,11 +57,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"const response = pm.response.json();\r",
-							"if (response.data?.length > 0) {\r",
-							"    const [challenge] = response.data;\r",
-							"    pm.collectionVariables.set('challengeId', challenge.id)\r",
-							"}"
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -72,12 +68,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/challenges/{{challengeId}}",
-					"protocol": "http",
+					"raw": "{{host}}/challenges/{{challengeId}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"challenges",
 						"{{challengeId}}"
@@ -101,12 +95,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/challenges/{{challengeId}}/solution",
-					"protocol": "http",
+					"raw": "{{host}}/challenges/{{challengeId}}/solution",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"challenges",
 						"{{challengeId}}",
@@ -143,12 +135,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/challenges",
-					"protocol": "http",
+					"raw": "{{host}}/challenges",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"challenges"
 					]
