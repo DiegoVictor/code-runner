@@ -39,7 +39,7 @@ Resources:
         SecretStringTemplate: '{"username": "app_user"}'
         GenerateStringKey: password
         PasswordLength: 30
-        ExcludeCharacters: "\"'@/\\:()?"
+        ExcludeCharacters: "\"'@/\\:()?`#"
 
   DbCluster:
     Type: AWS::RDS::DBCluster
