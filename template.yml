@@ -4,6 +4,9 @@ Parameters:
   ImageUri:
     Type: String
     Description: ECR Repository URI
+  CodeUri:
+    Type: String
+    Description: Package URI
 
 Metadata:
   BuildProperties:
@@ -31,7 +34,7 @@ Resources:
       Timeout: 60
       CodeUri:
         Bucket: !ImportValue coderunner-BucketName
-        Key: package/latest.zip
+        Key: !Ref CodeUri
       VpcConfig:
         SecurityGroupIds:
           - !ImportValue coderunner-LambdaSecurityGroupId
@@ -58,7 +61,7 @@ Resources:
       Timeout: 30
       CodeUri:
         Bucket: !ImportValue coderunner-BucketName
-        Key: package/latest.zip
+        Key: !Ref CodeUri
       Environment:
         Variables:
           NODE_ENV: production

@@ -83,7 +83,6 @@ jobs:
         run: |
           zip --symlinks -r package.zip ./*
           aws s3 cp package.zip s3://${{ env.CODERUNNER_BUCKET }}/package/${{ github.run_id }}.zip
-          aws s3 cp package.zip s3://${{ env.CODERUNNER_BUCKET }}/package/latest.zip
 
       - name: Deploy template.yml
         run: |
@@ -95,6 +94,7 @@ jobs:
             --role-arn ${CLOUDFORMATION_ROLE_ARN} \
             --parameter-overrides \
               ImageUri=${{ env.REPOSITORY_URI }}:${{ github.run_id }}
+              CodeUri=package/${{ github.run_id }}.zip
 
   migrations:
     runs-on: ubuntu-latest
