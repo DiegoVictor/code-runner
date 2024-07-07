@@ -1,0 +1,32 @@
+const { PrismaClient } = require("@prisma/client");
+const { env } = require("../../env");
+
+const manager = {
+  client: null,
+  orm: "prisma",
+  get prisma() {
+    return manager.client;
+  },
+  getURL: async () => {
+    if (env.NODE_ENV === "dev") {
+      return process.env.DATABASE_URL;
+    }
+
+    const { username, password } = await getSecret(
+      process.env.CLUSTER_SECRET_ID
+    );
+    return `postgresql://${username}:${password}@${process.env.CLUSTER_URL}/coderunner?schema=public`;
+  },
+  connect: async () => {
+    if (!manager.client) {
+      const datasourceUrl = await manager.getURL();
+      manager.client = new PrismaClient({
+        datasourceUrl,
+      });
+    }
+  },
+};
+
+module.exports = {
+  manager,
+};
