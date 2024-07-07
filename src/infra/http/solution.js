@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { z } = require("zod");
 const { challengeRepository } = require("../database/repositories/challenge");
 const { challengeSolution } = require("../../use-cases/solution");
-const { LANGUAGE } = require("../../common/language");
+const { LANGUAGE } = require("../../application/language");
 
 const app = Router();
 
