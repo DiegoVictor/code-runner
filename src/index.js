@@ -7,10 +7,13 @@ const { ZodError } = require("zod");
 const { env } = require("./env");
 const { challenges } = require("./infra/http/challenge");
 const { solution } = require("./infra/http/solution");
+const { manager } = require("./infra/database/manager");
 
 const app = express();
 
 app.use(express.json());
+
+app.use((req, res, next) => manager.connect().then(next));
 
 app.use(challenges);
 app.use(solution);
