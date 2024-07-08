@@ -1,4 +1,4 @@
-const { LANGUAGE } = require("../../../src/common/language");
+const { LANGUAGE } = require("../../../src/application/language");
 const { challengeSolution } = require("../../../src/use-cases/solution");
 
 const mockRun = jest.fn();

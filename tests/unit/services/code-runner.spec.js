@@ -1,5 +1,5 @@
 const { coderunner } = require("../../../src/infra/services/code-runner");
-const { LANGUAGE } = require("../../../src/common/language");
+const { LANGUAGE } = require("../../../src/application/language");
 
 const mockCoderunnerContainerUrl = "http://localhost:8080";
 const mockCoderunnerFunction = "CodeRunnerFunction";
