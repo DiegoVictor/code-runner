@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const secretManager = require("../services/secret-manager");
 const { env } = require("../../env");
 
 const manager = {
@@ -12,7 +13,7 @@ const manager = {
       return process.env.DATABASE_URL;
     }
 
-    const { username, password } = await getSecret(
+    const { username, password } = await secretManager.getSecret(
       process.env.CLUSTER_SECRET_ID
     );
     return `postgresql://${username}:${password}@${process.env.CLUSTER_URL}/coderunner?schema=public`;

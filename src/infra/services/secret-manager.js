@@ -10,5 +10,7 @@ const getSecret = async (SecretId) => {
 };
 
 module.exports = {
-  getSecret,
+  secretManager: {
+    getSecret,
+  },
 };
