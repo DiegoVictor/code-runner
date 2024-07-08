@@ -1,8 +1,8 @@
-const { prisma } = require("../prisma");
+const { manager } = require("../manager");
 
 const find = async ({ take, cursor }) => {
   const [challenges, total] = await Promise.all([
-    prisma.challenge.findMany({
+    manager.prisma.challenge.findMany({
       take,
       select: {
         id: true,
@@ -15,7 +15,7 @@ const find = async ({ take, cursor }) => {
       cursor: cursor && { id: cursor },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.challenge.count(),
+    manager.prisma.challenge.count(),
   ]);
 
   const response = {
@@ -28,7 +28,7 @@ const find = async ({ take, cursor }) => {
 };
 
 const findOneById = async (id) => {
-  const challenge = await prisma.challenge.findFirst({
+  const challenge = await manager.prisma.challenge.findFirst({
     where: { id },
     include: {
       languages: true,
@@ -45,7 +45,7 @@ const save = async ({
   inputs,
   languages,
 }) => {
-  await prisma.challenge.create({
+  await manager.prisma.challenge.create({
     data: {
       title,
       description,

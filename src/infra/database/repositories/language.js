@@ -1,7 +1,7 @@
-const { prisma } = require("../prisma");
+const { manager } = require("../manager");
 
 const findBy = async ({ code = [] }) => {
-  return prisma.language.findMany({
+  return manager.prisma.language.findMany({
     where: {
       code: {
         in: code,
