@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-const secretManager = require("../services/secret-manager");
+const { secretManager } = require("../services/secret-manager");
 const { env } = require("../../env");
 
 const manager = {
