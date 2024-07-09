@@ -64,7 +64,7 @@ Resources:
         Key: !Ref CodeUri
       Environment:
         Variables:
-          NODE_ENV: production
+          NODE_ENV: prod
           CODERUNNER_FUNCTION: !Ref CodeRunnerFunction
           CLUSTER_URL: !ImportValue coderunner-ClusterUrl
           CLUSTER_SECRET_ID: !ImportValue coderunner-ClusterCredentials
