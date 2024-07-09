@@ -1,12 +1,11 @@
 const { z } = require("zod");
 
 const schema = z.object({
-  DATABASE_URL:
-    process.env.NODE_ENV === "dev"
-      ? z.string({
-          required_error: "Missing DATABASE_URL in environment variable",
-        })
-      : z.undefined(),
+  DATABASE_URL: z
+    .string({
+      required_error: "Missing DATABASE_URL in environment variable",
+    })
+    .optional(),
   PORT: z.coerce
     .number({
       invalid_type_error: "PORT must be a number",
