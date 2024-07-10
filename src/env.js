@@ -20,6 +20,8 @@ const schema = z.object({
     .default("dev"),
   CODERUNNER_FUNCTION: z.string().default("CodeRunnerFunction"),
   CODERUNNER_CONTAINER_URL: z.string().url().optional(),
+  CLUSTER_URL: z.string().url().optional(),
+  CLUSTER_SECRET_ID: z.string().optional(),
 });
 
 module.exports.env = schema.parse(process.env);
