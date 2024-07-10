@@ -14,9 +14,11 @@ const manager = {
     }
 
     const { username, password } = await secretManager.getSecret(
-      process.env.CLUSTER_SECRET_ID
+      env.CLUSTER_SECRET_ID
     );
-    return `postgresql://${username}:${password}@${process.env.CLUSTER_URL}/coderunner?schema=public`;
+    const encoded = encodeURIComponent(password);
+
+    return `postgresql://${username}:${encoded}@${env.CLUSTER_URL}/coderunner?schema=public`;
   },
   connect: async () => {
     if (!manager.client) {
