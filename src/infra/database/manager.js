@@ -8,7 +8,7 @@ const manager = {
   get prisma() {
     return manager.client;
   },
-  getURL: async () => {
+  getUrl: async () => {
     if (env.NODE_ENV === "dev") {
       return process.env.DATABASE_URL;
     }
@@ -20,7 +20,7 @@ const manager = {
   },
   connect: async () => {
     if (!manager.client) {
-      const datasourceUrl = await manager.getURL();
+      const datasourceUrl = await manager.getUrl();
       manager.client = new PrismaClient({
         datasourceUrl,
       });
