@@ -79,7 +79,7 @@ app.post("/challenges", async (req, res) => {
               (data) => {
                 return data.value && data.expected;
               },
-              { message: "value and expected properties are required" }
+              { message: "value and expected are required" }
             )
         )
         .min(1),
