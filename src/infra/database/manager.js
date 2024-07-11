@@ -9,8 +9,8 @@ const manager = {
     return manager.client;
   },
   getUrl: async () => {
-    if (env.NODE_ENV === "dev") {
-      return process.env.DATABASE_URL;
+    if (env.NODE_ENV === "prod") {
+      return env.DATABASE_URL;
     }
 
     const { username, password } = await secretManager.getSecret(
