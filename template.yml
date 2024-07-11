@@ -48,6 +48,7 @@ Resources:
               Resource: '*'
       Environment:
         Variables:
+          NODE_ENV: prod
           PRISMA_CLI_BINARY_TARGETS: rhel-openssl-3.0.x
           CLUSTER_URL: !ImportValue coderunner-ClusterUrl
           CLUSTER_SECRET_ID: !ImportValue coderunner-ClusterCredentials
