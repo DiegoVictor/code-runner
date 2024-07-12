@@ -63,6 +63,13 @@ Resources:
       CodeUri:
         Bucket: !ImportValue coderunner-BucketName
         Key: !Ref CodeUri
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: '*'
       Environment:
         Variables:
           NODE_ENV: prod
