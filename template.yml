@@ -63,6 +63,10 @@ Resources:
       CodeUri:
         Bucket: !ImportValue coderunner-BucketName
         Key: !Ref CodeUri
+      VpcConfig:
+        SecurityGroupIds:
+          - !ImportValue coderunner-LambdaSecurityGroupId
+        SubnetIds: !Split [ ',', !ImportValue coderunner-SubnetsId ]
       Policies:
         - Version: '2012-10-17'
           Statement:
