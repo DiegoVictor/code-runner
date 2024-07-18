@@ -1,3 +1,8 @@
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Default: vpc-00b963a3999afd6d1
+
 Resources:
   CodeRunnerRepository:
     Type: AWS::ECR::Repository
@@ -67,7 +72,7 @@ Resources:
     Properties:
       GroupName: rds-lambda-1
       GroupDescription: Allow traffic from Lambda to RDS
-      VpcId: vpc-0dcf985f88fdc7e18
+      VpcId: !Ref VpcId
       # SecurityGroupIngress:
       #   - IpProtocol: tcp
       #     FromPort: 5432
@@ -93,7 +98,7 @@ Resources:
     Properties:
       GroupName: lambda-rds-1
       GroupDescription: Allow traffic from Lambda to RDS
-      VpcId: vpc-0dcf985f88fdc7e18
+      VpcId: !Ref VpcId
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: -1
@@ -114,7 +119,7 @@ Resources:
     Properties:
       GroupName: secretsmanager-lambda-1
       GroupDescription: Allow traffic from Lambda to SecretsManager
-      VpcId: vpc-0dcf985f88fdc7e18
+      VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
@@ -130,7 +135,7 @@ Resources:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.secretsmanager'
-      VpcId: vpc-0dcf985f88fdc7e18
+      VpcId: !Ref VpcId
       PrivateDnsEnabled: true
       VpcEndpointType: Interface
       SecurityGroupIds:
