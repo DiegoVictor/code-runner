@@ -141,12 +141,12 @@ Resources:
       SecurityGroupIds:
         - !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
       SubnetIds:
-        - subnet-04701fef257ae0c0a
-        - subnet-0cb1872219b2a9c19
-        - subnet-0d8b2b5b2e86eeaae
-        - subnet-067caf19899ca509d
-        - subnet-0664cdd67109a01ad
-        - subnet-06d34fb45ec9b8665
+        - subnet-00f1fe617f63529d1
+        - subnet-00d923ead851e0824
+        - subnet-0ea59365c818c61bc
+        - subnet-00c9625536bd0fc7b
+        - subnet-0cec470cf5eecbbf4
+        - subnet-0437091de3bd776e5
 
 Outputs:
   ClusterCredentials:
@@ -169,12 +169,12 @@ Outputs:
     Value: !Join [
       ',',
       [
-        'subnet-04701fef257ae0c0a',
-        'subnet-0cb1872219b2a9c19',
-        'subnet-0d8b2b5b2e86eeaae',
-        'subnet-067caf19899ca509d',
-        'subnet-0664cdd67109a01ad',
-        'subnet-06d34fb45ec9b8665'
+        'subnet-00f1fe617f63529d1',
+        'subnet-00d923ead851e0824',
+        'subnet-0ea59365c818c61bc',
+        'subnet-00c9625536bd0fc7b',
+        'subnet-0cec470cf5eecbbf4',
+        'subnet-0437091de3bd776e5'
       ]
     ]
     Export:
