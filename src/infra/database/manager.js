@@ -10,15 +10,15 @@ const manager = {
   },
   getUrl: async () => {
     if (env.NODE_ENV === "prod") {
-      return env.DATABASE_URL;
+      const { username, password } = await secretManager.getSecret(
+        env.CLUSTER_SECRET_ID
+      );
+      const encoded = encodeURIComponent(password);
+
+      return `postgresql://${username}:${encoded}@${env.CLUSTER_URL}/coderunner?schema=public`;
     }
 
-    const { username, password } = await secretManager.getSecret(
-      env.CLUSTER_SECRET_ID
-    );
-    const encoded = encodeURIComponent(password);
-
-    return `postgresql://${username}:${encoded}@${env.CLUSTER_URL}/coderunner?schema=public`;
+    return env.DATABASE_URL;
   },
   connect: async () => {
     if (!manager.client) {
