@@ -124,7 +124,6 @@ Resources:
       VpcId: !Ref VpcId
       CidrBlock: 172.31.96.0/20
       AvailabilityZone: us-east-1a
-      AvailabilityZoneId: use1-az1
       Tags:
         - Key: Name
           Value: LambdaPrivateSubnet1
@@ -167,7 +166,6 @@ Resources:
       VpcId: !Ref VpcId
       CidrBlock: 172.31.112.0/20
       AvailabilityZone: us-east-1a
-      AvailabilityZoneId: use1-az1
       Tags:
         - Key: Name
           Value: PublicInternetSubnet1
