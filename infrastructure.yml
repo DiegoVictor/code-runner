@@ -118,6 +118,88 @@ Resources:
       ToPort: 443
       DestinationSecurityGroupId: !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
 
+  LambdaPrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      CidrBlock: 172.31.96.0/20
+      AvailabilityZone: us-east-1a
+      AvailabilityZoneId: use1-az1
+      Tags:
+        - Key: Name
+          Value: LambdaPrivateSubnet1
+
+  LambdaPrivateSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref LambdaPrivateSubnet1
+      RouteTableId: !Ref LambdaPrivateRouteTable
+
+  LambdaPrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcId
+      Tags:
+        - Key: Name
+          Value: LambdaPrivateRouteTable
+
+  LambdaPrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref LambdaPrivateRouteTable
+      NatGatewayId: !Ref NatGateway
+      DestinationCidrBlock: 0.0.0.0/0
+
+  NATGatewayEIP:
+   Type: AWS::EC2::EIP
+   Properties:
+      Domain: vpc
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayEIP.AllocationId
+      SubnetId: !Ref PublicInternetSubnet1
+
+  PublicInternetSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      CidrBlock: 172.31.112.0/20
+      AvailabilityZone: us-east-1a
+      AvailabilityZoneId: use1-az1
+      Tags:
+        - Key: Name
+          Value: PublicInternetSubnet1
+
+  PublicInternetSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicInternetSubnet1
+      RouteTableId: !Ref PublicInternetRouteTable
+
+  PublicInternetRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcId
+      Tags:
+        - Key: Name
+          Value: PublicInternetRouteTable
+
+  PublicInternetRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicInternetRouteTable
+      GatewayId: !Ref InternetGateway
+      DestinationCidrBlock: 0.0.0.0/0
+
+  PublicInternetInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PublicInternetInternetGateway
+
   SecretsManagerEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -173,6 +255,7 @@ Outputs:
     Value: !Join [
       ',',
       [
+        !Ref LambdaPrivateSubnet1,
         'subnet-00f1fe617f63529d1',
         'subnet-00d923ead851e0824',
         'subnet-0ea59365c818c61bc',
