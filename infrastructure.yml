@@ -198,6 +198,12 @@ Resources:
         - Key: Name
           Value: PublicInternetInternetGateway
 
+  PublicInternetInternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VpcId
+      InternetGatewayId: !Ref PublicInternetInternetGateway
+
   SecretsManagerEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -220,7 +226,7 @@ Resources:
     Properties:
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.secretsmanager'
       VpcId: !Ref VpcId
-      PrivateDnsEnabled: true
+      # PrivateDnsEnabled: true
       VpcEndpointType: Interface
       SecurityGroupIds:
         - !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
