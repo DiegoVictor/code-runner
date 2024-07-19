@@ -104,6 +104,10 @@ Resources:
           FromPort: -1
           ToPort: -1
           DestinationSecurityGroupId: !GetAtt RdsSecurityGroup.GroupId
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
 
   LambdaSecurityGroupEgress:
     Type: AWS::EC2::SecurityGroupEgress
