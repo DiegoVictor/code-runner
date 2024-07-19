@@ -73,6 +73,7 @@ Resources:
             - Effect: Allow
               Action:
                 - secretsmanager:GetSecretValue
+                - lambda:InvokeFunction
               Resource: '*'
       Environment:
         Variables:
