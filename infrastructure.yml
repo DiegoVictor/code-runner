@@ -121,7 +121,7 @@ Resources:
   SecretsManagerEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: secretsmanager-lambda-1
+      GroupName: secretsmanager-sg
       GroupDescription: Allow traffic from Lambda to SecretsManager
       VpcId: !Ref VpcId
       SecurityGroupIngress:
