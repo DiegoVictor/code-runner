@@ -70,7 +70,7 @@ Resources:
   RdsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: rds-lambda-1
+      GroupName: rds-sg
       GroupDescription: Allow traffic from Lambda to RDS
       VpcId: !Ref VpcId
       # SecurityGroupIngress:
@@ -96,7 +96,7 @@ Resources:
   LambdaSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: lambda-rds-1
+      GroupName: lambda-sg
       GroupDescription: Allow traffic from Lambda to RDS
       VpcId: !Ref VpcId
       SecurityGroupEgress:
