@@ -190,7 +190,7 @@ Resources:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref PublicInternetRouteTable
-      GatewayId: !Ref InternetGateway
+      GatewayId: !Ref PublicInternetInternetGateway
       DestinationCidrBlock: 0.0.0.0/0
 
   PublicInternetInternetGateway:
