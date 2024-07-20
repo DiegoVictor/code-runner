@@ -216,7 +216,7 @@ Resources:
     Properties:
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.secretsmanager'
       VpcId: !Ref VpcId
-      # PrivateDnsEnabled: true
+      PrivateDnsEnabled: true
       VpcEndpointType: Interface
       SecurityGroupIds:
         - !GetAtt SecretsManagerEndpointSecurityGroup.GroupId
