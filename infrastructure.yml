@@ -2,6 +2,9 @@ Parameters:
   VpcId:
     Type: AWS::EC2::VPC::Id
     Default: vpc-00b963a3999afd6d1
+  InternetGatewayId:
+    Type: String
+    Default: igw-0325545963640282c
 
 Resources:
   CodeRunnerRepository:
@@ -188,21 +191,8 @@ Resources:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref PublicInternetRouteTable
-      GatewayId: !Ref PublicInternetInternetGateway
+      GatewayId: !Ref InternetGatewayId
       DestinationCidrBlock: 0.0.0.0/0
-
-  PublicInternetInternetGateway:
-    Type: AWS::EC2::InternetGateway
-    Properties:
-      Tags:
-        - Key: Name
-          Value: PublicInternetInternetGateway
-
-  PublicInternetInternetGatewayAttachment:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Properties:
-      VpcId: !Ref VpcId
-      InternetGatewayId: !Ref PublicInternetInternetGateway
 
   SecretsManagerEndpointSecurityGroup:
     Type: AWS::EC2::SecurityGroup
