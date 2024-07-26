@@ -131,10 +131,42 @@ Resources:
         - Key: Name
           Value: LambdaPrivateSubnet1
 
+  LambdaPrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      CidrBlock: 172.31.112.0/20
+      AvailabilityZone: us-east-1b
+      Tags:
+        - Key: Name
+          Value: LambdaPrivateSubnet2
+
+  LambdaPrivateSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      CidrBlock: 172.31.128.0/20
+      AvailabilityZone: us-east-1c
+      Tags:
+        - Key: Name
+          Value: LambdaPrivateSubnet3
+
   LambdaPrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref LambdaPrivateSubnet1
+      RouteTableId: !Ref LambdaPrivateRouteTable
+
+  LambdaPrivateSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref LambdaPrivateSubnet2
+      RouteTableId: !Ref LambdaPrivateRouteTable
+
+  LambdaPrivateSubnet3RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref LambdaPrivateSubnet3
       RouteTableId: !Ref LambdaPrivateRouteTable
 
   LambdaPrivateRouteTable:
