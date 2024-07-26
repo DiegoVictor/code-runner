@@ -199,7 +199,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VpcId
-      CidrBlock: 172.31.112.0/20
+      CidrBlock: 172.31.144.0/20
       AvailabilityZone: us-east-1a
       Tags:
         - Key: Name
