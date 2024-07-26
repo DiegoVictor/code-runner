@@ -279,12 +279,8 @@ Outputs:
       ',',
       [
         !Ref LambdaPrivateSubnet1,
-        'subnet-00f1fe617f63529d1',
-        'subnet-00d923ead851e0824',
-        'subnet-0ea59365c818c61bc',
-        'subnet-00c9625536bd0fc7b',
-        'subnet-0cec470cf5eecbbf4',
-        'subnet-0437091de3bd776e5'
+        !Ref LambdaPrivateSubnet2,
+        !Ref LambdaPrivateSubnet3
       ]
     ]
     Export:
