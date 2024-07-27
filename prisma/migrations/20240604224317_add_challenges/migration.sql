@@ -16,3 +16,11 @@ VALUES (
   NOW(),
   NOW()
 );
+
+INSERT INTO "_challenges_languages" ("A", "B")
+VALUES ('16d71cd6-eb1e-4f47-9d12-a8175553186a', '9458cda6-a32d-42f6-b520-69f69aa13935'),
+('16d71cd6-eb1e-4f47-9d12-a8175553186a', 'f6e881b8-bafd-472b-b81e-eadeea82f42d');
+
+INSERT INTO "_challenges_languages" ("A", "B")
+VALUES ('bc4bfdd8-e7d5-42e3-a0ca-7d3b04fa34eb', '9458cda6-a32d-42f6-b520-69f69aa13935'),
+('bc4bfdd8-e7d5-42e3-a0ca-7d3b04fa34eb', 'f6e881b8-bafd-472b-b81e-eadeea82f42d');
