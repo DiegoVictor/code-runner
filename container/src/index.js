@@ -16,7 +16,7 @@ const runners = {
 };
 
 const handler = async (event) => {
-  console.log(JSON.stringify(event, null, 2));
+  console.log(JSON.stringify(event));
   const language = event.language.toUpperCase();
 
   if (!Object.keys(LANGUAGE).includes(language)) {
