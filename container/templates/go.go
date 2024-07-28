@@ -12,7 +12,7 @@ import (
 
 type Request struct {
   Id string `json:"id"`
-  Value interface{} `json:"value"`
+  Value map[string]interface{} `json:"value"`
 }
 
 type Response struct {
