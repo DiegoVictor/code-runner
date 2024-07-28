@@ -15,6 +15,7 @@ const main = async ({ code, inputs }) => {
   await writeFile(filename, challenge);
 
   const result = await command("go", ["run", filename, JSON.stringify(inputs)]);
+  console.log(result);
 
   return JSON.parse(result.replace(/\n/, ""));
 };
