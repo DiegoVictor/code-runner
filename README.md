@@ -41,7 +41,7 @@ How would you run user's code in a safe way? This application is my answer, code
 ```
 npm install
 ```
-Or simple:
+Or simply:
 ```
 yarn
 ```
