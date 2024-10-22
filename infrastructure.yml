@@ -1,7 +1,7 @@
 Parameters:
   VpcId:
     Type: AWS::EC2::VPC::Id
-    Default: vpc-00b963a3999afd6d1
+    Default: vpc-0d5462fe36e408984
   InternetGatewayId:
     Type: String
     Default: igw-0325545963640282c
