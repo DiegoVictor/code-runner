@@ -4,7 +4,7 @@ Parameters:
     Default: vpc-0d5462fe36e408984
   InternetGatewayId:
     Type: String
-    Default: igw-0325545963640282c
+    Default: igw-02ca961c369600f90
 
 Resources:
   CodeRunnerRepository:
