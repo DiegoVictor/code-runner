@@ -10,6 +10,10 @@ const command = async (cmd, args) => {
       chunks.push(data);
     });
 
+    cli.stderr.on("data", (data) => {
+      chunks.push(data);
+    });
+
     cli.stdout.on("close", () => {
       const response = Buffer.concat(chunks).toString("utf8");
       resolve(response);
