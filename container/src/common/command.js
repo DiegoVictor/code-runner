@@ -1,7 +1,6 @@
 const { spawn } = require("node:child_process");
 
 const command = async (cmd, args) => {
-  console.log(`${cmd} ${args.join(" ")}`);
   const cli = spawn(cmd, args);
 
   return new Promise((resolve) => {
