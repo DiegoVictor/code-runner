@@ -24,6 +24,9 @@ describe("Command", () => {
           }
         },
       },
+      stderr: {
+        on: () => {},
+      },
     });
 
     const cmd = "echo";
