@@ -14,6 +14,7 @@ const main = async ({ code, inputs }) => {
   const filename = `/tmp/${runId}.go`;
   await writeFile(filename, challenge);
 
+  console.log(`go run ${filename} ${JSON.stringify(inputs)}`);
   const result = await command("go", ["run", filename, JSON.stringify(inputs)]);
   console.log(result);
 
