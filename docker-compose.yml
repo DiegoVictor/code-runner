@@ -14,7 +14,7 @@ services:
       - app_network
   code-runner:
     build:
-      dockerfile: ./container/Dockerfile
+      context: ./container
     restart: unless-stopped
     ports:
       - 9000:8080
@@ -22,9 +22,11 @@ services:
       - .:/var/task
     networks:
       - app_network
+
 volumes:
   pgdata:
     driver: local
+
 networks:
   app_network:
     driver: bridge
