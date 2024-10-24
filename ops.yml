@@ -70,6 +70,7 @@ Resources:
               - 'ec2:CreateVpcEndpoint'
               - 'ec2:DeleteNatGateway'
               - 'ec2:DeleteInternetGateway'
+              - 'ec2:DeleteRoute'
               - 'ec2:DeleteRouteTable'
               - 'ec2:DeleteSecurityGroup'
               - 'ec2:DeleteSubnet'
