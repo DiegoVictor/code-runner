@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f9ea2dd6-6f5c-4144-9885-6c5ddd3c6a8d",
+		"_postman_id": "d3e4fc53-cca6-40c3-bcfd-b44f89ae5789",
 		"name": "Code Runner",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19527899"
+		"_exporter_id": "4346128"
 	},
 	"item": [
 		{
@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"language\": \"go\",\r\n    \"code\": \"func run(params map[string]interface{}) (interface{}, error) {\\n  fmt.Println(\\\"asdasdsa\\\")\\n  num := float64(params[\\\"input\\\"].(float64))\\n  return num * num, nil\\n}\"\r\n}",
+							"raw": "{\r\n    \"language\": \"go\",\r\n    \"code\": \"func run(params map[string]interface{}) (interface{}, error) {\\n  num := float64(params[\\\"input\\\"].(float64))\\n  return num * num, nil\\n}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
