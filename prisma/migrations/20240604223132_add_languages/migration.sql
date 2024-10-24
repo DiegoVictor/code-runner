@@ -8,7 +8,7 @@ e'def run(input):\n  return None', NOW(), NOW());
 
 INSERT INTO "languages" ("id", "name", "code", "template", "createdAt", "updatedAt")
 VALUES ('d67c842f-cc49-4c49-aedd-4adcb2962f73', 'Go', 'go',
-e'func run(input interface{}) interface{} {\n  return nil\n}', NOW(), NOW());
+e'func run(params map[string]interface{}) (interface{}, error) {\n  return nil,nil\n}', NOW(), NOW());
 
 INSERT INTO "languages" ("id", "name", "code", "template", "createdAt", "updatedAt")
 VALUES (
