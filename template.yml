@@ -23,6 +23,9 @@ Resources:
       ImageUri: !Ref ImageUri
       MemorySize: 512
       Timeout: 30
+      Environment:
+        Variables:
+          GOCACHE: /tmp/.cache/go-build
 
   MigrationsFunction:
     Type: AWS::Serverless::Function
