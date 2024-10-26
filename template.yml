@@ -62,7 +62,7 @@ Resources:
       Handler: src/index.handler
       MemorySize: 256
       Runtime: nodejs20.x
-      Timeout: 30
+      Timeout: 60
       CodeUri:
         Bucket: !ImportValue coderunner-BucketName
         Key: !Ref CodeUri
