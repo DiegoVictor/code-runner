@@ -22,7 +22,7 @@ Resources:
       PackageType: Image
       ImageUri: !Ref ImageUri
       MemorySize: 512
-      Timeout: 30
+      Timeout: 60
       Environment:
         Variables:
           GOCACHE: /tmp/.cache/go-build
