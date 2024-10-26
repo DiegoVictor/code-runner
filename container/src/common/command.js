@@ -4,19 +4,24 @@ const command = async (cmd, args) => {
   const cli = spawn(cmd, args);
 
   return new Promise((resolve) => {
-    const chunks = [];
+    const stdout = [];
+    const stderr = [];
 
     cli.stdout.on("data", (data) => {
-      chunks.push(data);
+      stdout.push(data);
     });
 
     cli.stderr.on("data", (data) => {
-      chunks.push(data);
+      stderr.push(data);
     });
 
     cli.stdout.on("close", () => {
-      const response = Buffer.concat(chunks).toString("utf8");
-      resolve(response);
+      const err = Buffer.concat(stderr).toString("utf8");
+      if (err.length > 0) {
+        console.log(err);
+      }
+
+      resolve(Buffer.concat(stdout).toString("utf8"));
     });
   });
 };
