@@ -51,6 +51,8 @@ describe("Run Go Use Case", () => {
     const expected = [{ input: value, output: value ** 2 }];
     mockCommand.mockResolvedValueOnce(JSON.stringify(expected));
 
+    jest.spyOn(console, "log").mockImplementationOnce(() => {});
+
     const response = await main({ code, inputs });
 
     expect(mockGetTemplateByLanguage).toHaveBeenCalledWith({

@@ -24,6 +24,8 @@ describe("Handler", () => {
     const output = [{ input: 5, output: 25 }];
     mockMain.mockResolvedValueOnce(output);
 
+    jest.spyOn(console, "log").mockImplementationOnce(() => {});
+
     const inputs = [{ value: 5 }];
     const response = await handler({
       language,
@@ -49,6 +51,8 @@ describe("Handler", () => {
 
     const output = [{ input: 5, output: 25 }];
     mockMain.mockResolvedValueOnce(output);
+
+    jest.spyOn(console, "log").mockImplementationOnce(() => {});
 
     const inputs = [{ value: 5 }];
     const response = await handler({
@@ -77,6 +81,8 @@ describe("Handler", () => {
     async function run(value) {
       return value * value;
     }
+
+    jest.spyOn(console, "log").mockImplementationOnce(() => {});
 
     const inputs = [{ value: 5 }];
     const response = await handler({
