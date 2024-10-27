@@ -3,7 +3,7 @@ ARG FUNCTION_DIR="/function"
 
 
 # Build application
-FROM node:20-buster as app-build
+FROM node:20-buster AS app-build
 ARG FUNCTION_DIR
 
 RUN apt-get update && \
@@ -27,7 +27,7 @@ RUN npm install aws-lambda-ric
 
 
 # Install Go
-FROM node:20-buster as go-build
+FROM node:20-buster AS go-build
 RUN apt-get update && apt-get install -y curl && \
     curl -OL https://go.dev/dl/go1.22.0.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
