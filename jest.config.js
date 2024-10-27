@@ -34,6 +34,7 @@ const config = {
   coveragePathIgnorePatterns: [
     "\\\\node_modules\\\\",
     "container/src/helpers/typescript.js",
+    "src/infra/services/secret-manager.js",
   ],
 
   // Indicates which provider should be used to instrument code for coverage
