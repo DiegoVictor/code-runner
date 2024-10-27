@@ -82,7 +82,7 @@ jobs:
             -w /var/task \
             --entrypoint /bin/bash \
             amazon/aws-lambda-nodejs:20 \
-            -c "npm i --production"
+            -c "npm i --omit=dev"
 
       - name: Build and Upload Package
         run: |
