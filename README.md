@@ -108,20 +108,35 @@ yarn dev:server
 Request body:
 ```json
 {
-  "title": "Squares",
-  "description": "Calculate numbers square",
-  "instructions": "For each provided number calculate its square",
+  "title": "Square It Up!",
+  "description": "Create a function that takes a single integer and returns its square. This challenge will test your ability to perform basic math operations and return statements.",
+  "instructions": "1. Input: You'll receive a single integer as input.\n2. Output: Return the square of the input integer (the integer multiplied by itself).\n 3. Example: If the input is 5, the output should be 25.\n\nGive it a try and square it up!",
+  "languages": [
+    "js",
+    "ts",
+    "python",
+    "go"
+  ],
   "inputs": [
     {
-      "value": 5,
+      "id": "clwm7ealm000008ky9raxasvv",
+      "value": {
+          "input": 5
+      },
       "expected": 25
     },
     {
-      "value": 12,
+      "id": "clwm7eoyf000108ky2gmpa65o",
+      "value": {
+          "input": 12
+      },
       "expected": 144
      },
     {
-      "value": 25,
+      "id": "clwm7f482000308kyg437fhmq",
+      "value": {
+          "input": 25
+      },
       "expected": 625
     }
   ]
@@ -133,7 +148,7 @@ Request body:
 Request body:
 ```json
 {
-  "code": "async function run(value){return value * value;}",
+  "code": "function run(value){\n  return value * value;\n}",
   "language": "js",
 }
 ```
