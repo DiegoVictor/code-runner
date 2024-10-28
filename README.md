@@ -33,9 +33,13 @@ How would you run user's code in a safe way? This application is my answer, code
 * Node.js ^20.9.0
 * Serveless Framework
 * AWS Account
-  * [Elastic Container Registry](https://aws.amazon.com/ecr/)
+  * [Elastic Container Registry](https://aws.amazon.com/ecr)
   * [Lambda](https://aws.amazon.com/lambda)
-  * [API Gateway](https://aws.amazon.com/api-gateway/)
+  * [API Gateway](https://aws.amazon.com/api-gateway)
+  * [RDS](https://aws.amazon.com/pt/rds)
+  * [Secrets Manager](https://aws.amazon.com/pt/secrets-manager)
+  * [S3](https://aws.amazon.com/pt/s3)
+  * [EC2](https://aws.amazon.com/pt/ec2)
 
 # Install
 ```
