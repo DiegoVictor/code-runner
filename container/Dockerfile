@@ -21,7 +21,7 @@ COPY templates templates
 COPY src src
 COPY package.json .
 
-RUN npm install
+RUN npm install --omit=dev
 RUN npm install aws-lambda-ric
 
 
