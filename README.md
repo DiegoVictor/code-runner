@@ -1,4 +1,5 @@
 # Code Runner
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DiegoVictor/code-runner/deploy.yml?logo=github&style=flat-square)](https://github.com/DiegoVictor/code-runner/actions)
 [![postgres](https://img.shields.io/badge/postgres-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![prisma](https://img.shields.io/static/v1?label=prisma&message=5.15.0&color=2d3748&logo=prisma&style=flat-square)](https://www.prisma.io)
 [![serverless](https://img.shields.io/badge/serverless-3.38.0-FD5750?style=flat-square&logo=serverless)](https://www.serverless.com/)
