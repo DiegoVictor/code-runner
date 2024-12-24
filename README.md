@@ -1,4 +1,6 @@
 # Code Runner
+[![postgres](https://img.shields.io/badge/postgres-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![prisma](https://img.shields.io/static/v1?label=prisma&message=5.15.0&color=2d3748&logo=prisma&style=flat-square)](https://www.prisma.io)
 [![serverless](https://img.shields.io/badge/serverless-3.38.0-FD5750?style=flat-square&logo=serverless)](https://www.serverless.com/)
 [![jest](https://img.shields.io/badge/jest-29.7.0-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
 [![nodemon](https://img.shields.io/badge/nodemon-3.1.0-76d04b?style=flat-square&logo=nodemon)](https://nodemon.io/)
