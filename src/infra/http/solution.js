@@ -28,7 +28,7 @@ app.post("/challenges/:id/solution", async (req, res) => {
   const languages = challenge.languages.map((language) => language.code);
   if (!languages.includes(language)) {
     return res.status(400).json({
-      error: "Unknown language or not supported",
+      error: "Unknown or not supported language",
     });
   }
 
