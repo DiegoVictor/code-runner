@@ -12,5 +12,33 @@
     {
       "url": "http://localhost:5000"
     }
-  ]
+  ],
+  "paths": {
+  },
+  "components": {
+    "schemas": {
+      "Challenge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+  }
 }
