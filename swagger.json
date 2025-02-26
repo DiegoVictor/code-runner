@@ -14,6 +14,109 @@
     }
   ],
   "paths": {
+    "/challenges": {
+      "get": {
+        "tags": [
+          "Challenges"
+        ],
+        "parameters": [
+          {
+            "name": "cursorId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return challenges paginated",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of challenges",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Challenge"
+                      }
+                    },
+                    "cursorId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": "16d71cd6-eb1e-4f47-9d12-a8175553186a",
+                      "title": "Forming a Magic Square",
+                      "description": "Given a `3 x 3` matrix, convert it into a magic square at minimal cost.",
+                      "createdAt": "2025-02-22T14:44:38.455Z",
+                      "updatedAt": "2025-02-22T14:44:38.455Z"
+                    },
+                    {
+                      "id": "bc4bfdd8-e7d5-42e3-a0ca-7d3b04fa34eb",
+                      "title": "Caesar Cipher",
+                      "description": "A simple Caesar cipher that shifts the characters of a string by a fixed number of positions down the alphabet.",
+                      "createdAt": "2025-02-22T14:44:38.455Z",
+                      "updatedAt": "2025-02-22T14:44:38.455Z"
+                    }
+                  ],
+                  "cursorId": "bc4bfdd8-e7d5-42e3-a0ca-7d3b04fa34eb",
+                  "total": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation Error",
+                  "error": [
+                    {
+                      "code": "too_small",
+                      "message": "Number must be greater than 0",
+                      "path": [
+                        "limit"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
   },
   "components": {
     "schemas": {
