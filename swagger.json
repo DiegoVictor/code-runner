@@ -117,6 +117,173 @@
           }
         }
       },
+      "post": {
+        "tags": [
+          "Challenges"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Challenge",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 3
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 10
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "languages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "js",
+                        "ts",
+                        "python",
+                        "go"
+                      ]
+                    }
+                  },
+                  "inputs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "cuid"
+                        },
+                        "value": {
+                          "type": "object",
+                          "properties": {
+                            "input": {}
+                          }
+                        },
+                        "expected": {}
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "instructions",
+                  "languages",
+                  "inputs"
+                ]
+              },
+              "example": {
+                "title": "Square It Up!",
+                "description": "Create a function that takes a single integer and returns its square. This challenge will test your ability to perform basic math operations and return statements.",
+                "instructions": "1. Input: You'll receive a single integer as input.\n2. Output: Return the square of the input integer (the integer multiplied by itself).\n 3. Example: If the input is 5, the output should be 25.\n\nGive it a try and square it up!",
+                "languages": [
+                  "js",
+                  "ts",
+                  "python",
+                  "go"
+                ],
+                "inputs": [
+                  {
+                    "id": "clwm7ealm000008ky9raxasvv",
+                    "value": {
+                      "input": 5
+                    },
+                    "expected": 25
+                  },
+                  {
+                    "id": "clwm7eoyf000108ky2gmpa65o",
+                    "value": {
+                      "input": 12
+                    },
+                    "expected": 144
+                  },
+                  {
+                    "id": "clwm7f482000308kyg437fhmq",
+                    "value": {
+                      "input": 25
+                    },
+                    "expected": 625
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Challenge created."
+          },
+          "400": {
+            "description": "Validation Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation Error",
+                  "error": [
+                    {
+                      "code": "invalid_type",
+                      "expected": "string",
+                      "received": "undefined",
+                      "path": [
+                        "title"
+                      ],
+                      "message": "Required"
+                    },
+                    {
+                      "code": "invalid_type",
+                      "expected": "string",
+                      "received": "undefined",
+                      "path": [
+                        "description"
+                      ],
+                      "message": "Required"
+                    },
+                    {
+                      "code": "invalid_type",
+                      "expected": "string",
+                      "received": "undefined",
+                      "path": [
+                        "instructions"
+                      ],
+                      "message": "Required"
+                    },
+                    {
+                      "code": "invalid_type",
+                      "expected": "array",
+                      "received": "undefined",
+                      "path": [
+                        "languages"
+                      ],
+                      "message": "Required"
+                    },
+                    {
+                      "code": "invalid_type",
+                      "expected": "array",
+                      "received": "undefined",
+                      "path": [
+                        "inputs"
+                      ],
+                      "message": "Required"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
