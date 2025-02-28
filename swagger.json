@@ -437,6 +437,14 @@
           }
         }
       },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
     },
     "parameters": {
       "id": {
