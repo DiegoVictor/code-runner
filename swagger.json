@@ -383,6 +383,138 @@
         }
       }
     },
+    "/challenges/{id}/solution": {
+      "post": {
+        "tags": [
+          "Challenges"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "js",
+                      "ts",
+                      "python",
+                      "go"
+                    ]
+                  }
+                },
+                "required": [
+                  "code",
+                  "language"
+                ]
+              },
+              "example": {
+                "language": "js",
+                "code": "function squareItUp(n) {\n  return n * n;\n}"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Execute users' code, it uses the results to compare with the expected values provided for the challenge.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "Result",
+                    "properties": {
+                      "output": {},
+                      "pass": {
+                        "type": "boolean"
+                      },
+                      "expected": {}
+                    },
+                    "required": [
+                      "output",
+                      "pass"
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "output": 25,
+                    "pass": true,
+                    "expected": 25
+                  },
+                  {
+                    "output": 81,
+                    "pass": true,
+                    "expected": 81
+                  },
+                  {
+                    "output": 121,
+                    "pass": true
+                  },
+                  {
+                    "output": 1089,
+                    "pass": true
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationError"
+                    }
+                  ]
+                },
+                "examples": {
+                  "Validation Error": {
+                    "value": {
+                      "message": "Validation Error",
+                      "error": [
+                        {
+                          "code": "invalid_string",
+                          "message": "Invalid uuid",
+                          "path": [
+                            "id"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown or not supported language": {
+                    "value": {
+                      "error": "Unknown or not supported language"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
   },
   "components": {
     "schemas": {
