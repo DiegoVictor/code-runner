@@ -284,6 +284,105 @@
         }
       }
     },
+    "/challenges/{id}": {
+      "get": {
+        "tags": [
+          "Challenges"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return challenge's details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Challenge"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "instructions": {
+                          "type": "string"
+                        },
+                        "languages": {
+                          "type": "array",
+                          "title": "Language",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "template": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "id": "16d71cd6-eb1e-4f47-9d12-a8175553186a",
+                  "title": "Forming a Magic Square",
+                  "description": "Given a `3 x 3` matrix, convert it into a magic square at minimal cost.",
+                  "instructions": "We define a magic square to be an `n x m` matrix of distinct positive integers from `1` to `n²` where the sum of any row, column, or diagonal of length `n` is always equal to the same number: the magic constant.\n\nYou will be given a `3 x 3` matrix `s` of integers in the inclusive range `[1, 9]`. We can convert any digit `a` to any other digit `b` in the range `[1, 9]` at cost of `|a - b|`. Given `s`, convert it into a magic square at minimal cost. Print this cost on a new line.\n\n> **Note:** The resulting magic square must contain distinct integers in the inclusive range `[1, 9]`.\n\n#### Example\n\n$s = [[5, 3, 4], [1, 5, 8], [6, 4, 2]]\n\nThe matrix looks like this:\n\n```text\n5 3 4\n1 5 8\n6 4 2\n```\nWe can convert it to the following magic square:\n```text\n8 3 4\n1 5 9\n6 7 2\n```\n\nThis took three replacements at a cost of `|5 - 8| + | 8 - 9| + |4 - 7| = 7`.\n\n#### Sample Input\n\n```text\n4 9 2\n3 5 7\n8 1 5\n```\n\n#### Sample Output\n\n```text\n1\n```\n\n#### Explanation\n\nIf we change the bottom right value, `s[2][2]`, from `5` to `6` at a cost of `|6 - 5| = 1`,`s` becomes a magic square at the minimum possible cost.\n\nFrom: [Forming a Magic Square](https://www.hackerrank.com/challenges/magic-square-forming/problem)",
+                  "languages": [
+                    {
+                      "name": "JavaScript",
+                      "code": "js",
+                      "template": "async function run({ input }) {\n  return null;\n}"
+                    },
+                    {
+                      "name": "TypeScript",
+                      "code": "ts",
+                      "template": "async function run({ input }: { input: any }): Promise<null> {\n  return null;\n}"
+                    }
+                  ],
+                  "createdAt": "2025-02-22T14:44:38.455Z",
+                  "updatedAt": "2025-02-22T14:44:38.455Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation Error",
+                  "error": [
+                    {
+                      "code": "invalid_string",
+                      "message": "Invalid uuid",
+                      "path": [
+                        "id"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
