@@ -7,20 +7,20 @@
     "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-lambda": "^3.569.0",
-    "@aws-sdk/client-secrets-manager": "^3.592.0",
-    "@prisma/client": "^5.13.0",
-    "express": "^4.18.2",
+    "@aws-sdk/client-lambda": "^3.758.0",
+    "@aws-sdk/client-secrets-manager": "^3.758.0",
+    "@prisma/client": "^6.4.1",
+    "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
-    "prisma": "^5.13.0",
+    "prisma": "^6.4.1",
     "serverless-http": "^3.1.1",
-    "zod": "^3.23.6"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.20",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.5",
     "jest": "^29.7.0",
-    "nodemon": "^3.1.0",
-    "typescript": "^5.4.5"
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.3"
   }
 }
