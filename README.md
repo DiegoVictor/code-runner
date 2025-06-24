@@ -18,10 +18,10 @@ How would you run user's code in a safe way? This application is my answer, Code
 * [Requirements](#requirements)
 * [Install](#install)
   * [Configuring](#configuring)
+    * [`.env`](#env)
     * [Postgres](#postgres)
     * [Migrations](#migrations)
     * [Code Runner Container](#code-runner-container)
-    * [`.env`](#env)
 * [Usage](#usage)
   * [Routes](#routes)
     * [Requests](#requests)
@@ -57,6 +57,16 @@ yarn
 ## Configuring
 The application uses just one database: [Postgres](https://www.postgresql.org).
 
+### `.env`
+In this file you may configure the database URL, app's port, code-runner container URL and code-runner function name. Rename the `.env.example` in the root directory to `.env` and update your settings as needed.
+
+|key|description|default
+|---|---|---
+|DATABASE_URL|Database connection Url.|`postgresql://postgres:docker@localhost:5432/code-runner?schema=public`
+|PORT|Port number where the app will run.|`5000`
+|CODERUNNER_CONTAINER_URL|code-runner container URL. All you'll need to update if you change `docker-compose.yml` is the URL's port.|`http://localhost:9000/2015-03-31/functions/function/invocations`
+|CODERUNNER_FUNCTION|code-runner function name, it needs to match with the name on `template.yml`|`CodeRunnerFunction`
+
 ### Postgres
 For the fastest setup it is recommended to use [docker-compose](https://docs.docker.com/compose), you just need to run:
 ```bash
@@ -80,16 +90,6 @@ Also, it is necessary to run the code-runner container, this is the one that wil
 docker-compose up -d code-runner
 ```
 > Don't forget to update you `.env` file you changed the container settings.
-
-### `.env`
-In this file you may configure the database URL, app's port, code-runner container URL and code-runner function name. Rename the `.env.example` in the root directory to `.env` and update your settings as needed.
-
-|key|description|default
-|---|---|---
-|DATABASE_URL|Database connection Url.|`postgresql://postgres:docker@localhost:5432/code-runner?schema=public`
-|PORT|Port number where the app will run.|`5000`
-|CODERUNNER_CONTAINER_URL|code-runner container URL. All you'll need to update if you change `docker-compose.yml` is the URL's port.|`http://localhost:9000/2015-03-31/functions/function/invocations`
-|CODERUNNER_FUNCTION|code-runner function name, it needs to match with the name on `template.yml`|`CodeRunnerFunction`
 
 # Usage
 First of all start up the server:
