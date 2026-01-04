@@ -9,7 +9,6 @@ on:
       - '.github/workflows/deploy-infrastructure.yml'
   workflow_dispatch:
 
-
 jobs:
   deploy-infrastructure:
     uses: ./.github/workflows/deploy-infrastructure.yml
